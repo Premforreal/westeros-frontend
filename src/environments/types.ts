@@ -1,0 +1,6 @@
+export enum ENVIRONMENT_TYPE {
+    PRODUCTION,
+    DEVELOPMENT,
+    QA,
+    STAGING
+}
