@@ -34,10 +34,64 @@ westeros-frontend/
 │   │   ├── api.module.ts           
 │   │   ├── base-service.ts
 │   │   └── ...
-│   └── app/                  # Application source
+│   ├── app/                  # Application source
+│   │   ├── layouts/          # Layout components
+│   │   │   ├── navbar/            # Navigation bar component
+│   │   │   ├── footer/           # Footer component
+│   │   │   └── main-layout/      # Main layout wrapper
+│   │   └── home/            # Home page component
 ├── angular.json             # Angular workspace configuration
 └── package.json            # Project dependencies and scripts
 ```
+
+## UI Framework and Styling
+
+### Bootstrap Integration
+The project uses Bootstrap 5 for responsive layouts and components:
+
+```typescript
+// angular.json
+{
+  "styles": [
+    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "src/styles.scss"
+  ],
+  "scripts": [
+    "node_modules/@popperjs/core/dist/umd/popper.min.js",
+    "node_modules/bootstrap/dist/js/bootstrap.min.js"
+  ]
+}
+```
+
+### Layout Components
+
+1. **Main Layout** (`main-layout.component.ts`)
+   - Wrapper component that structures the entire application
+   - Uses Bootstrap's flex utilities for sticky footer
+   - Implements responsive container
+
+2. **Navbar** (`navbar.component.ts`)
+   - Responsive navigation bar using Bootstrap navbar
+   - Collapses on mobile devices
+   - Supports active route highlighting
+
+3. **Footer** (`footer.component.ts`)
+   - Responsive footer with grid system
+   - Custom styling for links and hover states
+   - Dynamic copyright year
+
+### Styling Architecture
+
+1. **Global Styles** (`styles.scss`)
+   - Base reset and typography
+   - Utility classes
+   - Responsive breakpoints
+   - Common variables
+
+2. **Component-Specific Styles**
+   - Scoped to components
+   - Extends Bootstrap classes
+   - Custom theming and overrides
 
 ## Environment Configuration Guide
 
@@ -166,8 +220,32 @@ ng e2e
    - Remove node_modules: `rm -rf node_modules`
    - Reinstall dependencies: `npm install`
 
+## Style Guide
+
+### CSS Class Naming Conventions
+- Use Bootstrap utilities where possible
+- Custom classes should be descriptive and follow BEM methodology
+- Component-specific styles should be scoped
+
+### Component Structure
+1. **Layout Components**
+   - Keep layouts simple and flexible
+   - Use Bootstrap grid system
+   - Implement responsive breakpoints
+
+2. **UI Components**
+   - Follow Bootstrap component patterns
+   - Keep components modular and reusable
+   - Document any custom behaviors
+
+### Responsive Design
+- Mobile-first approach using Bootstrap breakpoints
+- Test across different device sizes
+- Use responsive utilities consistently
+
 ## Further Help
 
 - [Angular CLI Documentation](https://angular.io/cli)
 - [Angular Environment Guide](https://angular.io/guide/build)
 - [ng-openapi-gen Documentation](https://github.com/cyclosproject/ng-openapi-gen)
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/)

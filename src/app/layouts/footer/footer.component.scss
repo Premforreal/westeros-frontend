@@ -1,0 +1,8 @@
+// Custom styles for footer if needed
+.footer-link {
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #fff !important;
+  }
+}
