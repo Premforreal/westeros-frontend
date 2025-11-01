@@ -1,12 +1,92 @@
 // Component specific styles here
 
-.date-range-wrapper {
-	.date-panel {
-		position: absolute;
-		top: calc(100% + 0.25rem);
-		left: 0;
-		z-index: 1060; // above navbar collapse
-		width: 100%;
-		max-width: 540px;
-	}
+// Hero section
+.hero-section {
+  min-height: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+// Search strip
+.search-strip {
+  border: 1px solid #e0e0e0;
+  
+  ::ng-deep .search-date-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    
+    .mat-form-field-underline {
+      display: none;
+    }
+    
+    .mat-form-field-infix {
+      border-top: none;
+    }
+  }
+}
+
+// Realm cards
+.realm-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+  }
+  
+  .realm-image-wrapper {
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &:hover img {
+    transform: scale(1.05);
+  }
+  
+  .realm-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  }
+}
+
+// Resort cards
+.resort-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+  }
+  
+  .resort-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .rating-stars {
+    font-size: 0.9rem;
+  }
+}
+
+// Value props
+.value-props {
+  background-color: #f8f9fa;
+  border-radius: 1rem;
+  
+  .value-icon {
+    opacity: 0.8;
+  }
 }

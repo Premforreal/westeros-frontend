@@ -19,6 +19,20 @@ export class HomeComponent {
   // Date range UI state (single-field popover)
   showDatePanel = false; // no longer used with Material, kept harmless
 
+  // Featured data
+  featuredRealms = [
+    { name: 'The North', description: 'Rugged beauty and ancient forests await', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop' },
+    { name: 'Dorne', description: 'Sun-soaked deserts and exotic luxury', image: 'https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?w=800&h=600&fit=crop' },
+    { name: 'The Vale', description: 'Mountain peaks and alpine serenity', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop' }
+  ];
+
+  featuredResorts = [
+    { name: 'Winterfell Lodge', realm: 'The North', rating: 4.8, priceFrom: 5999, image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop' },
+    { name: 'Sunspear Retreat', realm: 'Dorne', rating: 4.9, priceFrom: 7499, image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop' },
+    { name: 'Eyrie Heights', realm: 'The Vale', rating: 4.7, priceFrom: 6999, image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop' },
+    { name: 'Casterly Rock Inn', realm: 'Westerlands', rating: 4.6, priceFrom: 4999, image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop' }
+  ];
+
   get dateRangeDisplay(): string {
     const fmt = (d: Date) => `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')}`;
     return this.checkInDate && this.checkOutDate ? `${fmt(this.checkInDate)} — ${fmt(this.checkOutDate)}` : '';
