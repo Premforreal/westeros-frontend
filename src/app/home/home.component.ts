@@ -26,6 +26,7 @@ export class HomeComponent {
     { name: 'The Vale', description: 'Mountain peaks and alpine serenity', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop' }
   ];
 
+  // Featured resorts data - clicking "View" navigates to /resort/:id
   featuredResorts = [
     { name: 'Winterfell Lodge', realm: 'The North', rating: 4.8, priceFrom: 5999, image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop' },
     { name: 'Sunspear Retreat', realm: 'Dorne', rating: 4.9, priceFrom: 7499, image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop' },

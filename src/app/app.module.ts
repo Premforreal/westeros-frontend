@@ -11,11 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HomeComponent } from './home/home.component';
+import { ResortDetailComponent } from './resort-detail/resort-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ResortDetailComponent
   ],
   imports: [
     BrowserModule,

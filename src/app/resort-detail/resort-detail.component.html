@@ -1,0 +1,266 @@
+<div class="resort-detail-page">
+  <div class="container-fluid p-0">
+    <!-- Hero Section with Image Gallery -->
+    <div class="resort-hero position-relative">
+      <div class="main-image-wrapper">
+        <img [src]="mainImage" [alt]="resortName" class="main-image w-100">
+        <div class="hero-overlay">
+          <div class="container">
+            <div class="hero-content">
+              <span class="badge bg-primary mb-2">{{ realm }}</span>
+              <h1 class="resort-title text-white mb-2">{{ resortName }}</h1>
+              <div class="d-flex align-items-center text-white mb-2">
+                <span class="rating-badge me-3" [ngClass]="getRatingClass(rating)">
+                  {{ rating }}
+                </span>
+                <span class="rating-text">{{ getRatingText(rating) }}</span>
+                <span class="mx-2">•</span>
+                <span>{{ reviewCount }} reviews</span>
+              </div>
+              <p class="location mb-0">📍 {{ location }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Image Gallery Thumbnails -->
+      <div class="container mt-3">
+        <div class="row g-2">
+          <div class="col-4 col-md-2" *ngFor="let image of galleryImages.slice(0, 6)">
+            <img [src]="image" alt="Resort gallery" class="gallery-thumb w-100 rounded">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <div class="row">
+        <!-- Left Column: Details -->
+        <div class="col-lg-8">
+          
+          <!-- Property Highlights -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">Property Highlights</h2>
+            <div class="row g-3">
+              <div class="col-6 col-md-3" *ngFor="let facility of highlights">
+                <div class="facility-card text-center p-3 border rounded">
+                  <div class="facility-icon fs-2 mb-2">{{ facility.icon }}</div>
+                  <div class="facility-name small">{{ facility.name }}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- About This Property -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">About This Property</h2>
+            <div class="description-text">
+              <p *ngFor="let paragraph of description.split('\n\n')">{{ paragraph }}</p>
+            </div>
+          </section>
+
+          <!-- Most Popular Facilities -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">Most Popular Facilities</h2>
+            <div class="row">
+              <div class="col-md-6" *ngFor="let facility of popularFacilities">
+                <div class="d-flex align-items-center mb-2">
+                  <span class="text-success me-2">✓</span>
+                  <span>{{ facility }}</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Available Rooms -->
+          <section class="mb-5" id="rooms">
+            <h2 class="section-title mb-4">Available Rooms</h2>
+            <div class="row g-4">
+              <div class="col-12" *ngFor="let room of roomTypes">
+                <div class="room-card border rounded overflow-hidden" 
+                     [class.selected]="selectedRoom?.name === room.name"
+                     (click)="selectRoom(room)">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img [src]="room.image" [alt]="room.name" class="room-image w-100 h-100">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="room-details p-4">
+                        <h4 class="room-name mb-2">{{ room.name }}</h4>
+                        <p class="room-description text-muted mb-3">{{ room.description }}</p>
+                        <div class="room-amenities mb-3">
+                          <span class="badge bg-light text-dark me-2 mb-2" *ngFor="let amenity of room.amenities">
+                            {{ amenity }}
+                          </span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <div class="small text-muted">From</div>
+                            <div class="h4 text-primary mb-0">₹{{ room.pricePerNight | number }}</div>
+                            <div class="small text-muted">per night</div>
+                          </div>
+                          <button class="btn btn-primary" (click)="selectRoom(room); $event.stopPropagation()">
+                            {{ selectedRoom?.name === room.name ? 'Selected' : 'Select Room' }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Guest Reviews -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">Guest Reviews</h2>
+            
+            <!-- Review Categories -->
+            <div class="review-categories mb-4 p-4 bg-light rounded">
+              <div class="row g-3">
+                <div class="col-6 col-md-4" *ngFor="let category of reviewCategories">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="small">{{ category.name }}</span>
+                    <span class="badge bg-primary">{{ category.score }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Individual Reviews -->
+            <div class="reviews-list">
+              <div class="review-card border rounded p-4 mb-3" *ngFor="let review of reviews">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <h6 class="mb-1">{{ review.author }}</h6>
+                    <small class="text-muted">{{ review.country }} • {{ review.date | date: 'MMM dd, yyyy' }}</small>
+                  </div>
+                  <div class="review-rating">
+                    <span class="rating-badge" [ngClass]="getRatingClass(review.rating)">
+                      {{ review.rating }}
+                    </span>
+                  </div>
+                </div>
+                <p class="review-comment mb-0">{{ review.comment }}</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Nearby Attractions -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">What's Nearby</h2>
+            <div class="list-group">
+              <div class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let attraction of nearbyAttractions">
+                <span>🏛️ {{ attraction.name }}</span>
+                <span class="badge bg-secondary">{{ attraction.distance }}</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- House Rules -->
+          <section class="mb-5">
+            <h2 class="section-title mb-4">House Rules</h2>
+            <div class="house-rules p-4 border rounded">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <strong>Check-in:</strong> From {{ houseRules.checkIn }}
+                </div>
+                <div class="col-md-6">
+                  <strong>Check-out:</strong> Until {{ houseRules.checkOut }}
+                </div>
+                <div class="col-12">
+                  <strong>Children:</strong> {{ houseRules.childrenPolicy }}
+                </div>
+                <div class="col-12">
+                  <strong>Pets:</strong> {{ houseRules.petsPolicy }}
+                </div>
+                <div class="col-12">
+                  <strong>Cancellation:</strong> {{ houseRules.cancellationPolicy }}
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column: Booking Card -->
+        <div class="col-lg-4">
+          <div class="booking-card sticky-top">
+            <div class="card shadow-lg border-0">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h3 class="mb-0">Book Your Stay</h3>
+                  <span class="price-badge h4 text-primary mb-0">₹{{ priceFrom | number }}</span>
+                </div>
+                <p class="text-muted small mb-4">per night</p>
+
+                <!-- Date Selection -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Check-in Date</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input matInput [matDatepicker]="checkinPicker" 
+                           placeholder="Select date"
+                           [(ngModel)]="checkInDate"
+                           [min]="minCheckInDate"
+                           (dateChange)="onCheckInDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="checkinPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #checkinPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Check-out Date</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input matInput [matDatepicker]="checkoutPicker" 
+                           placeholder="Select date"
+                           [(ngModel)]="checkOutDate"
+                           [min]="minCheckOutDate">
+                    <mat-datepicker-toggle matSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #checkoutPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Guests</label>
+                  <input type="number" class="form-control" 
+                         [(ngModel)]="guests" min="1" max="12">
+                </div>
+
+                <!-- Selected Room Info -->
+                <div class="selected-room-info mb-3 p-3 bg-light rounded" *ngIf="selectedRoom">
+                  <div class="small text-muted mb-1">Selected Room</div>
+                  <div class="fw-bold">{{ selectedRoom.name }}</div>
+                  <div class="text-primary">₹{{ selectedRoom.pricePerNight | number }} / night</div>
+                </div>
+
+                <button class="btn btn-primary btn-lg w-100 mb-3" 
+                        (click)="bookNow()"
+                        [disabled]="!checkInDate || !checkOutDate || !selectedRoom">
+                  Reserve Now
+                </button>
+
+                <div class="text-center">
+                  <small class="text-muted">
+                    <span class="text-success">✓</span> Free cancellation up to 48 hours
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges mt-3 p-3 bg-light rounded">
+              <div class="small text-center mb-2 fw-semibold">Why Book With Us?</div>
+              <div class="d-flex flex-column gap-2">
+                <div class="small">✓ Best Price Guarantee</div>
+                <div class="small">✓ Secure Payment</div>
+                <div class="small">✓ 24/7 Customer Support</div>
+                <div class="small">✓ Instant Confirmation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

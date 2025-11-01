@@ -1,0 +1,261 @@
+// Resort Detail Page Styles
+
+.resort-detail-page {
+  padding-top: 56px; // Account for fixed navbar
+}
+
+// Hero Section
+.resort-hero {
+  .main-image-wrapper {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    
+    .main-image {
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 3rem 0 2rem;
+      
+      .hero-content {
+        .resort-title {
+          font-family: 'Cinzel', 'Trajan Pro', serif;
+          font-size: 2.5rem;
+          font-weight: 900;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .location {
+          font-size: 1.1rem;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+      }
+    }
+  }
+  
+  .gallery-thumb {
+    height: 120px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  }
+}
+
+// Rating Badge
+.rating-badge {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  
+  &.excellent {
+    background-color: #0f5132;
+    color: white;
+  }
+  
+  &.very-good {
+    background-color: #0d6efd;
+    color: white;
+  }
+  
+  &.good {
+    background-color: #198754;
+    color: white;
+  }
+  
+  &.average {
+    background-color: #ffc107;
+    color: #000;
+  }
+}
+
+// Section Titles
+.section-title {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #0d6efd;
+  padding-bottom: 0.5rem;
+}
+
+// Facility Cards
+.facility-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .facility-icon {
+    filter: grayscale(0.3);
+  }
+  
+  .facility-name {
+    font-weight: 600;
+  }
+}
+
+// Room Cards
+.room-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+  }
+  
+  &.selected {
+    border-color: #0d6efd;
+    border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+  }
+  
+  .room-image {
+    object-fit: cover;
+    min-height: 250px;
+  }
+  
+  .room-details {
+    .room-name {
+      font-family: 'Cinzel', 'Trajan Pro', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    
+    .room-amenities {
+      .badge {
+        font-weight: 500;
+        padding: 0.4rem 0.6rem;
+      }
+    }
+  }
+}
+
+// Review Cards
+.review-card {
+  transition: box-shadow 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .review-comment {
+    line-height: 1.6;
+  }
+}
+
+.review-categories {
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+// Booking Card
+.booking-card {
+  top: 80px;
+  
+  .card {
+    border-radius: 1rem;
+    
+    .price-badge {
+      font-weight: 700;
+    }
+    
+    .selected-room-info {
+      border-left: 3px solid #0d6efd;
+    }
+  }
+  
+  ::ng-deep .mat-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.trust-badges {
+  .small {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+// Description Text
+.description-text {
+  p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+}
+
+// House Rules
+.house-rules {
+  background-color: #f8f9fa;
+  
+  strong {
+    color: #495057;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 991px) {
+  .booking-card {
+    position: relative !important;
+    top: 0 !important;
+    margin-top: 2rem;
+  }
+  
+  .resort-hero .main-image-wrapper {
+    height: 350px;
+    
+    .hero-content .resort-title {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .resort-hero {
+    .main-image-wrapper {
+      height: 300px;
+    }
+    
+    .gallery-thumb {
+      height: 80px;
+    }
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .room-card {
+    .room-image {
+      min-height: 200px;
+    }
+  }
+}

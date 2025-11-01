@@ -1,0 +1,243 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+interface Facility {
+  icon: string;
+  name: string;
+}
+
+interface Review {
+  author: string;
+  rating: number;
+  date: string;
+  comment: string;
+  country: string;
+}
+
+interface RoomType {
+  name: string;
+  description: string;
+  capacity: number;
+  pricePerNight: number;
+  amenities: string[];
+  image: string;
+}
+
+@Component({
+  selector: 'app-resort-detail',
+  templateUrl: './resort-detail.component.html',
+  styleUrls: ['./resort-detail.component.scss']
+})
+export class ResortDetailComponent implements OnInit {
+  // Resort basic info
+  resortName = 'Winterfell Lodge';
+  realm = 'The North';
+  location = 'Northern Mountains, The North Kingdom';
+  rating = 4.8;
+  reviewCount = 256;
+  priceFrom = 5999;
+  
+  // Image gallery
+  mainImage = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop';
+  galleryImages = [
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400&h=300&fit=crop'
+  ];
+  
+  // Property highlights
+  highlights: Facility[] = [
+    { icon: '🏊', name: 'Outdoor Pool' },
+    { icon: '🍽️', name: 'Restaurant' },
+    { icon: '📶', name: 'Free WiFi' },
+    { icon: '🅿️', name: 'Free Parking' },
+    { icon: '💆', name: 'Spa & Wellness' },
+    { icon: '🏔️', name: 'Mountain View' },
+    { icon: '🔥', name: 'Fireplace' },
+    { icon: '🎿', name: 'Ski Equipment' }
+  ];
+  
+  // About description
+  description = `Located in the majestic Northern Mountains, Winterfell Lodge offers an authentic Game of Thrones experience with modern luxury amenities. Surrounded by ancient forests and snow-capped peaks, this resort features themed accommodations inspired by the legendary House Stark. 
+
+Guests can enjoy spectacular mountain views, a heated outdoor pool, and a full-service spa. The on-site restaurant serves Northern cuisine with a modern twist, featuring locally sourced ingredients and traditional recipes passed down through generations.
+
+Each room is elegantly appointed with rustic wooden furnishings, stone fireplaces, and floor-to-ceiling windows showcasing the breathtaking landscape. Perfect for adventure seekers and families alike, the resort offers guided hiking tours, winter sports activities, and medieval-themed entertainment.`;
+
+  // Most popular facilities
+  popularFacilities = [
+    'Outdoor Swimming Pool',
+    'Spa and Wellness Centre',
+    'Restaurant & Bar',
+    'Room Service',
+    'Free WiFi',
+    'Free Parking',
+    'Family Rooms',
+    'Non-smoking Rooms',
+    'Fitness Center',
+    'Tour Desk'
+  ];
+  
+  // Room types
+  roomTypes: RoomType[] = [
+    {
+      name: 'Stark Suite',
+      description: 'Spacious suite with king bed, living area, and mountain views',
+      capacity: 2,
+      pricePerNight: 8999,
+      amenities: ['King Bed', 'Mountain View', 'Fireplace', 'Balcony', 'Mini Bar'],
+      image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Direwolf Den',
+      description: 'Cozy room with rustic charm and forest views',
+      capacity: 2,
+      pricePerNight: 5999,
+      amenities: ['Queen Bed', 'Forest View', 'Fireplace', 'Free WiFi'],
+      image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Family Quarters',
+      description: 'Two-bedroom suite perfect for families with children',
+      capacity: 4,
+      pricePerNight: 12999,
+      amenities: ['2 Bedrooms', 'Living Room', 'Kitchenette', 'Balcony', 'Kids Welcome'],
+      image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&h=300&fit=crop'
+    }
+  ];
+  
+  // Guest reviews
+  reviews: Review[] = [
+    {
+      author: 'Arya S.',
+      rating: 5,
+      date: '2025-10-15',
+      comment: 'Absolutely magical experience! The themed rooms are incredible and the staff made us feel like royalty. The mountain views are breathtaking.',
+      country: 'India'
+    },
+    {
+      author: 'Jon T.',
+      rating: 4.5,
+      date: '2025-10-10',
+      comment: 'Great location for winter activities. The spa was excellent and the food was outstanding. Winter is coming, and this is the perfect place to experience it!',
+      country: 'USA'
+    },
+    {
+      author: 'Sansa L.',
+      rating: 5,
+      date: '2025-09-28',
+      comment: 'The attention to detail in the Game of Thrones theming is phenomenal. Every corner has something special. Will definitely return!',
+      country: 'UK'
+    }
+  ];
+  
+  // Review categories
+  reviewCategories = [
+    { name: 'Staff', score: 9.2 },
+    { name: 'Facilities', score: 8.9 },
+    { name: 'Cleanliness', score: 9.5 },
+    { name: 'Comfort', score: 9.1 },
+    { name: 'Value for Money', score: 8.6 },
+    { name: 'Location', score: 9.4 },
+    { name: 'Free WiFi', score: 8.8 }
+  ];
+  
+  // House rules
+  houseRules = {
+    checkIn: '2:00 PM',
+    checkOut: '11:00 AM',
+    childrenPolicy: 'Children of all ages are welcome',
+    petsPolicy: 'Pets are not allowed',
+    cancellationPolicy: 'Free cancellation up to 48 hours before check-in'
+  };
+  
+  // Nearby attractions
+  nearbyAttractions = [
+    { name: 'Winterfell Castle Ruins', distance: '5 km' },
+    { name: 'Northern Forest Trail', distance: '2 km' },
+    { name: 'Ice Dragon Peak', distance: '15 km' },
+    { name: 'Stark Museum', distance: '8 km' }
+  ];
+  
+  // Booking form
+  checkInDate: Date | null = null;
+  checkOutDate: Date | null = null;
+  guests = 2;
+  selectedRoom: RoomType | null = null;
+  
+  // Date constraints
+  minCheckInDate: Date = new Date();
+  minCheckOutDate: Date = this.addDays(new Date(), 1);
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    // In real app, fetch resort data based on route params
+    const resortId = this.route.snapshot.paramMap.get('id');
+    // TODO: Load resort data from API
+  }
+  
+  getRatingClass(rating: number): string {
+    if (rating >= 9) return 'excellent';
+    if (rating >= 8) return 'very-good';
+    if (rating >= 7) return 'good';
+    return 'average';
+  }
+  
+  getRatingText(rating: number): string {
+    if (rating >= 9) return 'Excellent';
+    if (rating >= 8) return 'Very Good';
+    if (rating >= 7) return 'Good';
+    return 'Average';
+  }
+  
+  getStarArray(rating: number): number[] {
+    return Array(5).fill(0).map((_, i) => i < Math.floor(rating) ? 1 : 0);
+  }
+  
+  selectRoom(room: RoomType): void {
+    this.selectedRoom = room;
+  }
+  
+  bookNow(): void {
+    if (!this.checkInDate || !this.checkOutDate || !this.selectedRoom) {
+      alert('Please select dates and a room type');
+      return;
+    }
+    
+    // Calculate total nights and price
+    const nights = Math.ceil((this.checkOutDate.getTime() - this.checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+    const totalPrice = nights * this.selectedRoom.pricePerNight;
+    
+    console.log('Booking:', {
+      resort: this.resortName,
+      room: this.selectedRoom.name,
+      checkIn: this.checkInDate,
+      checkOut: this.checkOutDate,
+      guests: this.guests,
+      nights,
+      totalPrice
+    });
+    
+    // TODO: Navigate to booking confirmation page
+    alert(`Booking confirmed! Total: ₹${totalPrice.toLocaleString()} for ${nights} night(s)`);
+  }
+  
+  onCheckInDateChange(): void {
+    if (this.checkInDate) {
+      this.minCheckOutDate = this.addDays(this.checkInDate, 1);
+      if (this.checkOutDate && this.checkOutDate < this.minCheckOutDate) {
+        this.checkOutDate = null;
+      }
+    }
+  }
+  
+  private addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+}
