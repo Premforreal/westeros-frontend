@@ -90,13 +90,17 @@ westeros-frontend/
 │   │   ├── services/                  # App-level services
 │   │   │   └── auth.service.ts        # Minimal role provider (stub)
 │   │   ├── home/                      # Home page component
-│   │   │   ├── home.component.ts      # Search, featured realms & resorts
+│   │   │   ├── home.component.ts      # Search, realms & properties
 │   │   │   ├── home.component.html    # Booking.com-inspired layout
 │   │   │   └── home.component.scss    # Hero section, cards, styling
-│   │   ├── resort-detail/             # Resort detail page (NEW)
-│   │   │   ├── resort-detail.component.ts    # Full resort information
-│   │   │   ├── resort-detail.component.html  # Detail page layout
-│   │   │   └── resort-detail.component.scss  # Detailed styling
+│   │   ├── realm-detail/              # Realm detail page (NEW)
+│   │   │   ├── realm-detail.component.ts     # Realm properties and filters
+│   │   │   ├── realm-detail.component.html   # Realm listing layout
+│   │   │   └── realm-detail.component.scss   # Realm-specific styling
+│   │   ├── resort-detail/             # Resort detail page
+│   │   │   ├── resort-detail.component.ts    # Property information
+│   │   │   ├── resort-detail.component.html  # Property detail layout
+│   │   │   └── resort-detail.component.scss  # Property styling
 │   │   ├── app-routing.module.ts      # Routes using VerticalLayoutComponent
 │   │   └── app.module.ts              # Root module
 ├── angular.json                        # Angular workspace configuration
@@ -113,9 +117,39 @@ westeros-frontend/
   - Material date range picker (check-in/check-out)
   - Guest selector
   - Search button
-- **Featured Realms** - 3 realm cards with image overlays (The North, Dorne, The Vale)
-- **Featured Resorts** - 4 resort cards with ratings, pricing, and "View" button
+- **Featured Realms** - Interactive realm cards with:
+  - Realm image and description
+  - Properties preview
+  - "Explore Realm" button
+- **Featured Properties** - Curated properties from all realms
 - **Value Propositions** - Trust badges and service highlights
+
+### Realm Detail Page (`/realm/:name`)
+**Comprehensive realm exploration page** featuring:
+1. **Hero Section**
+   - Realm banner image
+   - Realm name and description
+   - Medieval-themed typography
+
+2. **Property Filters**
+   - Price range selector
+   - Rating filter
+   - Property type filter (Castles, Inns, Resorts)
+   - Interactive map (coming soon)
+
+3. **Property Listings**
+   - Grid view of all realm properties
+   - Property cards with:
+     - High-quality images
+     - Property name and description
+     - Rating badge
+     - Starting price
+     - Quick view options
+
+4. **Sorting Options**
+   - Recommended (default)
+   - Price (Low to High)
+   - Rating
 
 ### Resort Detail Page (`/resort/:id`)
 **Comprehensive property page** inspired by Booking.com hotel pages:
@@ -356,6 +390,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'resort/:id', component: ResortDetailComponent },
+      { path: 'realm/:name', component: RealmDetailComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -363,11 +398,17 @@ const routes: Routes = [
 ```
 
 **Navigation Flow:**
-1. Home page displays featured resorts
-2. Click "View" button on any resort card
-3. Navigate to `/resort/:id` (e.g., `/resort/1`)
-4. Resort detail page loads with full information
-5. Select dates, room type, and book
+1. Home page displays featured realms and properties
+2. Two primary navigation paths:
+   - **Realm Exploration:**
+     1. Click "Explore The North" (or any realm)
+     2. Navigate to `/realm/the-north`
+     3. View all properties within that realm
+     4. Filter and sort realm properties
+   - **Direct Property View:**
+     1. Click "View" on any property card
+     2. Navigate to `/resort/winterfell`
+     3. View property details and book
 
 ## 📦 Key Features Implementation
 
@@ -529,8 +570,9 @@ ng e2e
 ### Phase 1 (Current) ✅
 - [x] Home page with search functionality
 - [x] Material date range picker
-- [x] Featured realms and resorts
+- [x] Featured realms and properties
 - [x] Resort detail page
+- [x] Realm detail page with filters
 - [x] Game of Thrones theming
 - [x] Responsive layout
 
@@ -559,19 +601,36 @@ ng e2e
 
 ## 📊 Mock Data
 
-Currently using hardcoded mock data for demonstration:
+Currently using structured mock data for demonstration:
 
 ```typescript
-// Featured Realms
-- The North (rugged forests)
-- Dorne (desert luxury)
-- The Vale (mountain peaks)
+// Realm Structure
+{
+  name: 'The North',
+  description: 'Rugged beauty and ancient forests await',
+  properties: [
+    {
+      id: 'winterfell',
+      name: 'Winterfell Castle Hotel',
+      rating: 4.8,
+      priceFrom: 5999,
+      description: 'Ancient stronghold turned luxury hotel'
+    },
+    {
+      id: 'white-harbor',
+      name: 'White Harbor Inn',
+      rating: 4.7,
+      priceFrom: 4999,
+      description: 'Seaside luxury in the North\'s largest port'
+    }
+    // More properties...
+  ]
+}
 
-// Featured Resorts
-1. Winterfell Lodge - ₹5,999/night
-2. Sunspear Retreat - ₹7,499/night
-3. Eyrie Heights - ₹6,999/night
-4. Casterly Rock Inn - ₹4,999/night
+// Available Realms
+1. The North - Castles and mountain retreats
+2. Dorne - Desert palaces and water gardens
+3. The Vale - Mountain fortresses and coastal keeps
 ```
 
 ## 🎨 Design Inspiration

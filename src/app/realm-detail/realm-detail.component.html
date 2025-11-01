@@ -1,0 +1,126 @@
+<div class="realm-detail">
+  <!-- Hero Section -->
+  <div class="realm-hero">
+    <img [src]="realm.image" [alt]="realm.name" class="hero-image">
+    <div class="hero-overlay">
+      <div class="container">
+        <h1 class="realm-title text-white mb-2">{{ realm.name }}</h1>
+        <p class="lead text-white mb-0">{{ realm.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container my-5">
+    <div class="row g-4">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3">
+        <div class="filters-section p-3 mb-4">
+          <h3 class="filter-title mb-3">Filters</h3>
+          
+          <!-- Price Range -->
+          <div class="mb-4">
+            <label class="form-label fw-bold">Price Range</label>
+            <div class="d-flex align-items-center gap-2">
+              <input type="number" class="form-control form-control-sm" placeholder="Min">
+              <span>-</span>
+              <input type="number" class="form-control form-control-sm" placeholder="Max">
+            </div>
+          </div>
+          
+          <!-- Rating Filter -->
+          <div class="mb-4">
+            <label class="form-label fw-bold">Rating</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rating4plus">
+              <label class="form-check-label" for="rating4plus">4+ ★</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rating3plus">
+              <label class="form-check-label" for="rating3plus">3+ ★</label>
+            </div>
+          </div>
+          
+          <!-- Property Type -->
+          <div class="mb-4">
+            <label class="form-label fw-bold">Property Type</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="typeCastle">
+              <label class="form-check-label" for="typeCastle">Castle</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="typeInn">
+              <label class="form-check-label" for="typeInn">Inn</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="typeResort">
+              <label class="form-check-label" for="typeResort">Resort</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Preview -->
+        <div class="map-placeholder text-center p-4">
+          <div>
+            <i class="bi bi-map fs-1"></i>
+            <p class="mb-0">Map Coming Soon</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Properties List -->
+      <div class="col-lg-9">
+        <!-- Sort Options -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h2 class="h4 mb-0">{{ realm.properties.length }} Properties in {{ realm.name }}</h2>
+          </div>
+          <div class="sort-options">
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-secondary btn-sm active">
+                Recommended
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">
+                Price (Low to High)
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">
+                Rating
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Properties Grid -->
+        <div class="row g-4">
+          <div class="col-md-6" *ngFor="let property of realm.properties">
+            <div class="card property-card border-0 shadow-sm h-100">
+              <div class="position-relative">
+                <img [src]="property.image" [alt]="property.name" class="card-img-top property-image">
+                <div class="position-absolute top-0 end-0 m-3">
+                  <span class="badge bg-primary">
+                    {{ property.rating }}
+                    <i class="bi bi-star-fill ms-1"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h3 class="property-title h5 mb-2">{{ property.name }}</h3>
+                <p class="text-muted mb-3">{{ property.description }}</p>
+                <div class="d-flex justify-content-between align-items-end">
+                  <div>
+                    <div class="small text-muted">From</div>
+                    <div class="h4 mb-0 text-primary">₹{{ property.priceFrom | number }}</div>
+                    <div class="small text-muted">per night</div>
+                  </div>
+                  <a [routerLink]="['/resort', property.id]" class="btn btn-outline-primary">
+                    View Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

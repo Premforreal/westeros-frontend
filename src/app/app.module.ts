@@ -12,12 +12,14 @@ import { AppComponent } from './app.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HomeComponent } from './home/home.component';
 import { ResortDetailComponent } from './resort-detail/resort-detail.component';
+import { RealmDetailComponent } from './realm-detail/realm-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ResortDetailComponent
+    ResortDetailComponent,
+    RealmDetailComponent
   ],
   imports: [
     BrowserModule,
