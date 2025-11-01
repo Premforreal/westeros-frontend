@@ -1,1 +1,12 @@
 // Component specific styles here
+
+.date-range-wrapper {
+	.date-panel {
+		position: absolute;
+		top: calc(100% + 0.25rem);
+		left: 0;
+		z-index: 1060; // above navbar collapse
+		width: 100%;
+		max-width: 540px;
+	}
+}

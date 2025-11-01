@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/scss/bootstrap';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Ensure Material overlays appear above Bootstrap fixed navbar */
+.cdk-overlay-container {
+  z-index: 1200;
+}
 
 * {
   margin: 0;
