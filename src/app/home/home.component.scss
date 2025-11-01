@@ -1,13 +1,54 @@
 // Component specific styles here
 
-// Hero section
+// Hero section with Game of Thrones aesthetic
 .hero-section {
   min-height: 200px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #0f0f0f 100%);
   border-radius: 1rem;
   padding: 3rem 2rem;
   color: white;
   margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  
+  // Subtle texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 3px
+      );
+    pointer-events: none;
+  }
+  
+  // Trajan Pro styling for headings (Game of Thrones authentic)
+  h1 {
+    font-family: 'Cinzel', 'Trajan Pro', serif;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .lead {
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+  }
 }
 
 // Search strip

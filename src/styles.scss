@@ -21,6 +21,35 @@ body {
   background-color: #f5f5f5;
 }
 
+// Game of Thrones: Trajan Pro Font (using Cinzel as closest free alternative)
+// Trajan Pro is the exact font used in Game of Thrones logo - inspired by Roman square capitals
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.trajan-font {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+// Brand/Logo styling with authentic GoT feel
+.navbar-brand {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+// Buttons maintain the Trajan aesthetic
+.btn {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
 a {
   text-decoration: none;
   color: inherit;
