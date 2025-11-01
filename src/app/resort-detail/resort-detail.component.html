@@ -27,7 +27,10 @@
       <div class="container mt-3">
         <div class="row g-2">
           <div class="col-4 col-md-2" *ngFor="let image of galleryImages.slice(0, 6)">
-            <img [src]="image" alt="Resort gallery" class="gallery-thumb w-100 rounded">
+            <img [src]="image" alt="Resort gallery" class="gallery-thumb w-100 rounded" 
+                 (click)="setMainImage(image)"
+                 [class.active]="mainImage === image"
+                 style="cursor: pointer;">
           </div>
         </div>
       </div>
@@ -197,27 +200,25 @@
 
                 <!-- Date Selection -->
                 <div class="mb-3">
-                  <label class="form-label fw-semibold">Check-in Date</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input matInput [matDatepicker]="checkinPicker" 
-                           placeholder="Select date"
-                           [(ngModel)]="checkInDate"
-                           [min]="minCheckInDate"
-                           (dateChange)="onCheckInDateChange()">
-                    <mat-datepicker-toggle matSuffix [for]="checkinPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #checkinPicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label fw-semibold">Check-out Date</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input matInput [matDatepicker]="checkoutPicker" 
-                           placeholder="Select date"
-                           [(ngModel)]="checkOutDate"
-                           [min]="minCheckOutDate">
-                    <mat-datepicker-toggle matSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #checkoutPicker></mat-datepicker>
+                  <label class="form-label fw-semibold">Select Dates</label>
+                  <mat-form-field appearance="outline" class="w-100 search-date-field">
+                    <mat-date-range-input [rangePicker]="picker" [min]="minCheckInDate">
+                      <input matStartDate placeholder="Check-in" name="start" 
+                             [(ngModel)]="checkInDate" 
+                             (dateChange)="onCheckInDateChange()" 
+                             (click)="picker.open()" 
+                             (focus)="picker.open()">
+                      <input matEndDate placeholder="Check-out" name="end" 
+                             [(ngModel)]="checkOutDate" 
+                             [min]="minCheckOutDate" 
+                             (click)="picker.open()" 
+                             (focus)="picker.open()">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <button type="button" mat-icon-button matSuffix (click)="clearDates()" *ngIf="checkInDate || checkOutDate" title="Clear dates">
+                      <span class="small">✕</span>
+                    </button>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
                   </mat-form-field>
                 </div>
 

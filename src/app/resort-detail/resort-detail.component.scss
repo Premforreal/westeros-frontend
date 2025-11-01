@@ -52,6 +52,11 @@
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
+
+    &.active {
+      border: 2px solid #0d6efd;
+      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+    }
   }
 }
 
@@ -188,9 +193,17 @@
     }
   }
   
-  ::ng-deep .mat-form-field {
+  ::ng-deep .search-date-field {
     .mat-form-field-wrapper {
-      padding-bottom: 0.5rem;
+      padding-bottom: 0;
+    }
+    
+    .mat-form-field-underline {
+      display: none;
+    }
+    
+    .mat-form-field-infix {
+      border-top: none;
     }
   }
 }

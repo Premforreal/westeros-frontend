@@ -193,6 +193,11 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
     if (rating >= 7) return 'Good';
     return 'Average';
   }
+
+  setMainImage(image: string): void {
+    // Convert thumbnail URL to main image URL
+    this.mainImage = image.replace('w=400&h=300', 'w=1200&h=800');
+  }
   
   getStarArray(rating: number): number[] {
     return Array(5).fill(0).map((_, i) => i < Math.floor(rating) ? 1 : 0);
@@ -229,10 +234,19 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
   onCheckInDateChange(): void {
     if (this.checkInDate) {
       this.minCheckOutDate = this.addDays(this.checkInDate, 1);
+      // Do not auto-set checkout; let user pick the end date to avoid surprises
       if (this.checkOutDate && this.checkOutDate < this.minCheckOutDate) {
         this.checkOutDate = null;
       }
+    } else {
+      this.minCheckOutDate = this.addDays(new Date(), 1);
     }
+  }
+
+  clearDates(): void {
+    this.checkInDate = null;
+    this.checkOutDate = null;
+    this.minCheckOutDate = this.addDays(new Date(), 1);
   }
   
   private addDays(date: Date, days: number): Date {
