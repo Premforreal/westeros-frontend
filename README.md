@@ -24,24 +24,32 @@ Navigate to `http://localhost:4200/`. The application will automatically reload 
 ```
 westeros-frontend/
 ├── src/
-│   ├── environments/           # Environment configurations
-│   │   ├── environment.ts           # Default environment
+│   ├── environments/                 # Environment configurations
+│   │   ├── environment.ts            # Default environment
 │   │   ├── environment.development.ts# Development environment
-│   │   ├── environment.prod.ts      # Production environment
-│   │   └── types.ts                 # Environment type definitions
-│   ├── services/              # API Services (ng-openapi-gen)
-│   │   ├── api-configuration.ts     # API URL configuration
+│   │   ├── environment.prod.ts       # Production environment
+│   │   └── types.ts                  # Environment type definitions
+│   ├── services/                     # API Services (ng-openapi-gen)
+│   │   ├── api-configuration.ts      # API URL configuration
 │   │   ├── api.module.ts           
 │   │   ├── base-service.ts
 │   │   └── ...
-│   ├── app/                  # Application source
-│   │   ├── layouts/          # Layout components
-│   │   │   ├── navbar/            # Navigation bar component
-│   │   │   ├── footer/           # Footer component
-│   │   │   └── main-layout/      # Main layout wrapper
-│   │   └── home/            # Home page component
-├── angular.json             # Angular workspace configuration
-└── package.json            # Project dependencies and scripts
+│   ├── app/                           # Application source
+│   │   ├── layouts/                   # Layout components
+│   │   │   ├── navbar/                # Navigation bar component
+│   │   │   ├── footer/                # Footer component
+│   │   │   ├── main-layout/           # (Legacy) Main layout wrapper
+│   │   │   └── vertical/              # Primary app wrapper used in routing
+│   │   ├── menu/                      # Role-based menu configuration
+│   │   │   ├── menu.types.ts          # Menu item types
+│   │   │   └── menu.config.ts         # MENU definition with roles
+│   │   ├── services/                  # App-level services
+│   │   │   └── auth.service.ts        # Minimal role provider (stub)
+│   │   ├── home/                      # Home page component
+│   │   ├── app-routing.module.ts      # Routes using VerticalLayoutComponent
+│   │   └── app.module.ts              # Root module
+├── angular.json                        # Angular workspace configuration
+└── package.json                        # Project dependencies and scripts
 ```
 
 ## UI Framework and Styling
@@ -63,22 +71,53 @@ The project uses Bootstrap 5 for responsive layouts and components:
 }
 ```
 
+Alternatively (and currently also enabled), Bootstrap is imported via SCSS for theming and variables:
+
+```scss
+// src/styles.scss
+@import 'bootstrap/scss/bootstrap';
+```
+
+Note: Including both the compiled CSS (via angular.json) and SCSS import can duplicate styles. It's fine during early development; feel free to remove the CSS entry in angular.json later and rely solely on the SCSS import.
+
 ### Layout Components
 
-1. **Main Layout** (`main-layout.component.ts`)
-   - Wrapper component that structures the entire application
-   - Uses Bootstrap's flex utilities for sticky footer
-   - Implements responsive container
+1. **Vertical Layout** (`vertical-layout.component.ts`)
+   - Primary wrapper used by the router
+   - Renders the Navbar and a full-width content area (no sidebar)
+   - Minimal padding and full-height page shell
 
 2. **Navbar** (`navbar.component.ts`)
-   - Responsive navigation bar using Bootstrap navbar
-   - Collapses on mobile devices
-   - Supports active route highlighting
+   - Responsive Bootstrap navbar
+   - Renders menu items based on role-aware `MENU` configuration
+   - Collapses on mobile devices; supports active route highlighting
 
 3. **Footer** (`footer.component.ts`)
    - Responsive footer with grid system
    - Custom styling for links and hover states
    - Dynamic copyright year
+
+### Role‑Based Menu
+
+- Types live in `src/app/menu/menu.types.ts`.
+- Configuration lives in `src/app/menu/menu.config.ts` as `MENU`.
+- Roles are provided by `src/app/services/auth.service.ts` (stub returns `['Admin']`).
+- The Navbar filters `MENU` by the current user's roles and renders allowed links.
+
+Add a new menu item:
+
+```ts
+// src/app/menu/menu.config.ts
+{
+   id: 'reports',
+   title: 'Reports',
+   type: 'item',
+   url: '/reports',
+   role: ['Admin', 'User']
+}
+```
+
+Make it admin-only by setting `role: ['Admin']`.
 
 ### Styling Architecture
 

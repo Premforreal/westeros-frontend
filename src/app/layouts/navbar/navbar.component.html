@@ -6,10 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <li class="nav-item" *ngFor="let link of menuLinks">
+          <a class="nav-link" [routerLink]="link.url" routerLinkActive="active">{{ link.title }}</a>
         </li>
-        <!-- Add more navigation links as needed -->
       </ul>
     </div>
   </div>

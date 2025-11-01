@@ -4,19 +4,22 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { VerticalLayoutComponent } from './vertical/vertical-layout.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    VerticalLayoutComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports: [
-    MainLayoutComponent
+    MainLayoutComponent,
+    VerticalLayoutComponent
   ]
 })
 export class LayoutsModule { }

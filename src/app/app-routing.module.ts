@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { VerticalLayoutComponent } from './layouts/vertical/vertical-layout.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: '**', redirectTo: '' }
+  {
+    path: '',
+    component: VerticalLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: '**', redirectTo: '' }
+    ]
+  }
 ];
 
 @NgModule({
