@@ -1,6 +1,21 @@
 # Westeros Frontend
 
+**A Game of Thrones themed resort booking platform** built with Angular 15, featuring an immersive Seven Realms experience inspired by Booking.com's user interface.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+
+## 🎯 Project Overview
+
+Westeros Frontend is a luxury resort booking SaaS application that brings the world of Game of Thrones to life. Users can browse and book themed resorts across the Seven Realms, each offering unique experiences inspired by the legendary houses and locations from the series.
+
+### Key Features
+- 🏰 **Game of Thrones Theming** - Authentic design with Trajan Pro font (GoT logo font)
+- 📅 **Advanced Date Range Picker** - Material Design date selection with validation
+- 🏨 **Resort Detail Pages** - Comprehensive property information inspired by Booking.com
+- 🎨 **Booking.com-Inspired UI** - Professional layout with hero sections, reviews, and facility highlights
+- 🔐 **Role-Based Access** - Menu system with admin/user permissions
+- 📱 **Fully Responsive** - Mobile-first design with Bootstrap 5
+- 🌍 **Multi-Realm Support** - The North, Dorne, The Vale, and more
 
 ## Quick Start
 
@@ -19,7 +34,36 @@ npm run test           # Runs unit tests
 
 Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Project Structure
+## 🎨 Design & Theming
+
+### Game of Thrones Font System
+The application uses **Trajan Pro** (via **Cinzel** from Google Fonts) - the authentic font used in the Game of Thrones logo:
+
+```scss
+// All headings use Trajan-inspired typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+// Brand/Logo styling
+.navbar-brand {
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+```
+
+### Color Scheme
+- **Dark Gradients** - Inspired by GoT opening sequence
+- **Primary Blue** - `#0d6efd` (Bootstrap primary)
+- **Success Green** - For confirmations and availability
+- **Medieval Blacks/Grays** - Hero sections with texture overlays
+
+## 📁 Project Structure
 
 ```
 westeros-frontend/
@@ -46,13 +90,89 @@ westeros-frontend/
 │   │   ├── services/                  # App-level services
 │   │   │   └── auth.service.ts        # Minimal role provider (stub)
 │   │   ├── home/                      # Home page component
+│   │   │   ├── home.component.ts      # Search, featured realms & resorts
+│   │   │   ├── home.component.html    # Booking.com-inspired layout
+│   │   │   └── home.component.scss    # Hero section, cards, styling
+│   │   ├── resort-detail/             # Resort detail page (NEW)
+│   │   │   ├── resort-detail.component.ts    # Full resort information
+│   │   │   ├── resort-detail.component.html  # Detail page layout
+│   │   │   └── resort-detail.component.scss  # Detailed styling
 │   │   ├── app-routing.module.ts      # Routes using VerticalLayoutComponent
 │   │   └── app.module.ts              # Root module
 ├── angular.json                        # Angular workspace configuration
 └── package.json                        # Project dependencies and scripts
 ```
 
-## UI Framework and Styling
+## 🏠 Application Pages
+
+### Home Page (`/`)
+**Booking.com-inspired landing page** featuring:
+- **Hero Section** - Dark gradient with Game of Thrones aesthetic
+- **Search Strip** - Horizontal layout with:
+  - Destination input
+  - Material date range picker (check-in/check-out)
+  - Guest selector
+  - Search button
+- **Featured Realms** - 3 realm cards with image overlays (The North, Dorne, The Vale)
+- **Featured Resorts** - 4 resort cards with ratings, pricing, and "View" button
+- **Value Propositions** - Trust badges and service highlights
+
+### Resort Detail Page (`/resort/:id`)
+**Comprehensive property page** inspired by Booking.com hotel pages:
+
+#### Sections:
+1. **Hero with Image Gallery**
+   - Large hero image with resort name overlay
+   - Thumbnail gallery (6+ images)
+   - Rating badge and location
+
+2. **Property Highlights**
+   - Visual facility grid (Pool, Restaurant, WiFi, Parking, Spa, etc.)
+   - 8 key amenities with icons
+
+3. **About This Property**
+   - Detailed resort description
+   - Multi-paragraph storytelling
+
+4. **Available Rooms**
+   - 3 room types (Stark Suite, Direwolf Den, Family Quarters)
+   - Room images, descriptions, capacity
+   - Amenities badges
+   - Per-night pricing
+   - Selection functionality
+
+5. **Guest Reviews**
+   - Review category scores (Staff, Facilities, Cleanliness, Comfort, etc.)
+   - Individual review cards with ratings, dates, comments
+   - Country flags
+
+6. **Nearby Attractions**
+   - Distance indicators
+   - Local landmarks and activities
+
+7. **House Rules**
+   - Check-in/out times
+   - Cancellation policy
+   - Children and pets policies
+
+8. **Sticky Booking Card** (Sidebar)
+   - Date pickers with validation
+   - Guest count selector
+   - Selected room display
+   - Price calculation
+   - Reserve button
+   - Trust badges
+
+## 🎨 UI Framework and Styling
+
+### Dependencies
+```json
+{
+  "@angular/material": "^15.2.9",
+  "@angular/cdk": "^15.2.9",
+  "bootstrap": "^5.3.8"
+}
+```
 
 ### Bootstrap Integration
 The project uses Bootstrap 5 for responsive layouts and components:
@@ -119,18 +239,40 @@ Add a new menu item:
 
 Make it admin-only by setting `role: ['Admin']`.
 
+### Angular Material Components
+The application uses Material Design for advanced UI components:
+
+```typescript
+// Imported Material modules
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+```
+
+**Key Features:**
+- Date range picker with validation
+- Min/max date constraints
+- Clear date button
+- Material form fields
+- CDK overlay system (z-index: 1200)
+
 ### Styling Architecture
 
-1. **Global Styles** (`styles.scss`)
+1. **Global Styles** (`src/styles.scss`)
+   - Bootstrap SCSS import
+   - Material theme (indigo-pink)
+   - Game of Thrones font system (Cinzel/Trajan Pro)
    - Base reset and typography
-   - Utility classes
+   - CDK overlay z-index adjustments
    - Responsive breakpoints
-   - Common variables
 
 2. **Component-Specific Styles**
-   - Scoped to components
-   - Extends Bootstrap classes
-   - Custom theming and overrides
+   - Scoped SCSS files per component
+   - Hero sections with gradients and overlays
+   - Card hover effects and transitions
+   - Custom Material form field styling
+   - Responsive image galleries
 
 ## Environment Configuration Guide
 
@@ -204,7 +346,105 @@ export class ApiConfiguration {
 }
 ```
 
-## Common Tasks
+## 🚀 Routing
+
+```typescript
+const routes: Routes = [
+  {
+    path: '',
+    component: VerticalLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'resort/:id', component: ResortDetailComponent },
+      { path: '**', redirectTo: '' }
+    ]
+  }
+];
+```
+
+**Navigation Flow:**
+1. Home page displays featured resorts
+2. Click "View" button on any resort card
+3. Navigate to `/resort/:id` (e.g., `/resort/1`)
+4. Resort detail page loads with full information
+5. Select dates, room type, and book
+
+## 📦 Key Features Implementation
+
+### 1. Date Range Picker
+```typescript
+// Material date range with validation
+<mat-date-range-input [rangePicker]="picker" [min]="minCheckInDate">
+  <input matStartDate [(ngModel)]="checkInDate" (dateChange)="onCheckInMatChange()">
+  <input matEndDate [(ngModel)]="checkOutDate" [min]="minCheckOutDate">
+</mat-date-range-input>
+```
+
+**Features:**
+- Min date constraint (today for check-in)
+- Dynamic min checkout date (1 day after check-in)
+- Clear dates button
+- Opens on click/focus
+- Auto-validation (clears invalid selections)
+
+### 2. Resort Search
+```typescript
+// Search form model
+{
+  realmOrDestination: string;
+  checkInDate: Date | null;
+  checkOutDate: Date | null;
+  guests: number;
+}
+```
+
+### 3. Room Selection
+```typescript
+// Room types with pricing and amenities
+{
+  name: 'Stark Suite',
+  description: 'Spacious suite with mountain views',
+  capacity: 2,
+  pricePerNight: 8999,
+  amenities: ['King Bed', 'Mountain View', 'Fireplace', 'Balcony']
+}
+```
+
+### 4. Review System
+```typescript
+// Review categories with scores
+{
+  reviewCategories: [
+    { name: 'Staff', score: 9.2 },
+    { name: 'Facilities', score: 8.9 },
+    { name: 'Cleanliness', score: 9.5 }
+  ]
+}
+```
+
+## 🎭 Game of Thrones Theming
+
+### Font Implementation
+```html
+<!-- index.html -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+```
+
+### Themed Elements
+- **Navbar Brand**: "WESTEROS" in uppercase Cinzel
+- **Realm Badges**: The North, Dorne, The Vale, Westerlands
+- **Room Names**: Stark Suite, Direwolf Den, Family Quarters
+- **Location Names**: Northern Mountains, Ice Dragon Peak, Winterfell Castle Ruins
+- **Medieval Icons**: 🏰 🔥 🎿 🏔️
+
+### Visual Style
+- Dark gradients inspired by GoT opening
+- Textured overlays on hero sections
+- Wide letter-spacing for dramatic effect
+- Stone/rustic color palette
+- Shadow effects for depth
+
+## 🛠️ Common Tasks
 
 ### Code Generation
 ```bash
@@ -279,12 +519,110 @@ ng e2e
 
 ### Responsive Design
 - Mobile-first approach using Bootstrap breakpoints
+- Sticky booking card on desktop (position: sticky)
+- Collapsed card sections on mobile
+- Responsive image galleries
 - Test across different device sizes
-- Use responsive utilities consistently
 
-## Further Help
+## 🔮 Future Enhancements
+
+### Phase 1 (Current) ✅
+- [x] Home page with search functionality
+- [x] Material date range picker
+- [x] Featured realms and resorts
+- [x] Resort detail page
+- [x] Game of Thrones theming
+- [x] Responsive layout
+
+### Phase 2 (Planned)
+- [ ] Backend API integration
+- [ ] Real resort data from database
+- [ ] Search results page with filters
+- [ ] User authentication and profiles
+- [ ] Booking confirmation flow
+- [ ] Payment integration
+- [ ] Admin dashboard for resort owners
+- [ ] Review submission system
+- [ ] Email notifications
+- [ ] Booking management
+
+### Phase 3 (Future)
+- [ ] Multi-language support
+- [ ] Currency conversion
+- [ ] Map integration
+- [ ] Virtual tours (360° images)
+- [ ] Loyalty program (Genius-style)
+- [ ] Mobile app (Ionic/Capacitor)
+- [ ] AI-powered recommendations
+- [ ] Social media sharing
+- [ ] Gift cards/vouchers
+
+## 📊 Mock Data
+
+Currently using hardcoded mock data for demonstration:
+
+```typescript
+// Featured Realms
+- The North (rugged forests)
+- Dorne (desert luxury)
+- The Vale (mountain peaks)
+
+// Featured Resorts
+1. Winterfell Lodge - ₹5,999/night
+2. Sunspear Retreat - ₹7,499/night
+3. Eyrie Heights - ₹6,999/night
+4. Casterly Rock Inn - ₹4,999/night
+```
+
+## 🎨 Design Inspiration
+
+- **Booking.com** - Layout structure, search interface, property pages
+- **Game of Thrones** - Theming, fonts, naming conventions
+- **Material Design** - Date pickers, form fields, interactive elements
+- **Bootstrap** - Responsive grid, cards, utilities
+
+## 📚 Tech Stack Summary
+
+| Technology | Purpose |
+|------------|---------|
+| **Angular 15** | Frontend framework |
+| **TypeScript 4.9** | Type-safe JavaScript |
+| **Bootstrap 5.3** | CSS framework & components |
+| **Angular Material 15** | Date pickers & advanced UI |
+| **SCSS** | Styling with variables |
+| **RxJS 7.8** | Reactive programming |
+| **Google Fonts (Cinzel)** | Game of Thrones typography |
+
+## 📝 Recent Updates
+
+### Latest Changes (November 2025)
+1. ✅ Implemented Game of Thrones font system (Trajan Pro/Cinzel)
+2. ✅ Created resort detail page component
+3. ✅ Added Material date range picker
+4. ✅ Redesigned home page with Booking.com-inspired layout
+5. ✅ Added mock data for realms and resorts
+6. ✅ Implemented room selection functionality
+7. ✅ Created review system with categories
+8. ✅ Added sticky booking card with validation
+9. ✅ Configured routing for resort details
+
+## 🤝 Contributing
+
+This is a personal project. For questions or suggestions, please contact the repository owner.
+
+## 📄 License
+
+This project is private and not licensed for public use.
+
+## 🔗 Further Help
 
 - [Angular CLI Documentation](https://angular.io/cli)
 - [Angular Environment Guide](https://angular.io/guide/build)
+- [Angular Material](https://material.angular.io/)
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [Google Fonts](https://fonts.google.com/)
 - [ng-openapi-gen Documentation](https://github.com/cyclosproject/ng-openapi-gen)
-- [Bootstrap Documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+
+---
+
+**Built with ❄️ in the Seven Kingdoms**
