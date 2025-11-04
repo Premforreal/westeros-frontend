@@ -24,12 +24,9 @@ export class RealmDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log('Route params:', params);
       const realmId = params['id'];
-      console.log('Looking for realm with ID:', realmId);
       if (realmId) {
         this.propertyService.getRealm(realmId).subscribe(realm => {
-          console.log('Found realm:', realm);
           if (realm) {
             this.realm = realm;
           }

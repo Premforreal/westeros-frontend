@@ -1,0 +1,253 @@
+{
+  "realms": [
+    {
+      "id": "the-north",
+      "name": "The North",
+      "description": "Vast, cold, and ancient — where honor and hospitality warm the chill.",
+      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "properties": [
+        {
+          "id": "winterfell",
+          "name": "Winterfell Castle Hotel",
+          "realm": "The North",
+          "shortDescription": "Ancient stronghold of House Stark turned luxury hotel",
+          "description": "Experience the ancient seat of House Stark, now transformed into a luxury resort while maintaining its historic character. Our castle-resort offers a unique blend of medieval atmosphere and modern comfort, featuring authentic Nordic-inspired cuisine, traditional hot spring baths, and activities that bring the rich history of the North to life.",
+          "rating": 4.8,
+          "priceFrom": 5999,
+          "location": "Northern Mountains, The North",
+          "coordinates": { "lat": 55.75, "lng": -3.99 },
+          "mainImage": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop",
+          "galleryImages": [
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop"
+          ],
+          "features": [
+            {
+              "category": "Accommodation",
+              "description": "Luxurious castle accommodations featuring authentic medieval architecture with modern comforts",
+              "amenities": ["Themed Suites", "Private Towers", "Castle Views", "Modern Heating"]
+            },
+            {
+              "category": "Dining",
+              "description": "Multiple dining venues serving Northern cuisine with locally-sourced ingredients",
+              "amenities": ["Great Hall Restaurant", "Winterfell Tavern", "Private Dining", "Room Service"]
+            },
+            {
+              "category": "Activities",
+              "description": "Immersive experiences that bring the North to life",
+              "amenities": ["Archery Range", "Horse Riding", "Castle Tours", "Winter Sports"]
+            }
+          ],
+          "reviews": [
+            {
+              "author": "Jon Snow",
+              "rating": 5,
+              "date": "2025-10-15",
+              "comment": "Feels just like home. The hot springs are amazing!",
+              "country": "The North"
+            },
+            {
+              "author": "Sansa Stark",
+              "rating": 4.5,
+              "date": "2025-10-10",
+              "comment": "Beautiful restoration, maintaining the authentic Northern charm.",
+              "country": "The North"
+            }
+          ],
+          "reviewCategories": [
+            { "name": "Cleanliness", "score": 4.8 },
+            { "name": "Service", "score": 4.9 },
+            { "name": "Comfort", "score": 4.7 }
+          ],
+          "nearbyAttractions": [
+            {
+              "name": "Godswood",
+              "description": "Ancient spiritual grove with a heart tree",
+              "distance": "0.1 km"
+            },
+            {
+              "name": "Winter Town",
+              "description": "Historic market town with local crafts",
+              "distance": "1.2 km"
+            }
+          ],
+          "policies": {
+            "checkIn": "3:00 PM",
+            "checkOut": "11:00 AM",
+            "cancellation": "Free cancellation up to 7 days before arrival",
+            "pets": "Allowed with prior arrangement",
+            "houseRules": ["No smoking inside", "Quiet hours 10 PM - 7 AM", "Respect the Godswood"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-vale",
+      "name": "The Vale",
+      "description": "High mountains and sky palaces above the clouds.",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop",
+      "properties": [
+        {
+          "id": "eyrie-sky-palace",
+          "name": "The Eyrie Sky Palace",
+          "realm": "The Vale",
+          "shortDescription": "Sky-high luxury with views of the Vale",
+          "description": "Perched high among the Mountains of the Moon, the Eyrie Sky Palace offers a serene escape above the clouds. Guests enjoy breathtaking views, crystal-clear air, and elegant stone chambers that blend medieval majesty with modern luxury.",
+          "rating": 4.9,
+          "priceFrom": 7999,
+          "location": "Mountains of the Moon, The Vale",
+          "coordinates": { "lat": 41.92, "lng": -0.43 },
+          "mainImage": "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=1200&h=800&fit=crop",
+          "galleryImages": [
+            "https://images.unsplash.com/photo-1535916707207-35f97e715e1b?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1519821172141-b5d8e7b1c8c4?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1503264116251-35a269479413?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=300&fit=crop"
+          ],
+          "features": [
+            {
+              "category": "Accommodation",
+              "description": "Elegant sky chambers and suites with glass balconies overlooking the Vale",
+              "amenities": ["Glass Balconies", "Mountain Views", "Sky Lounges", "Fireplaces"]
+            },
+            {
+              "category": "Dining",
+              "description": "Gourmet mountain cuisine with local herbs and alpine ingredients",
+              "amenities": ["Sky Terrace Restaurant", "Falcon Bar", "Breakfast in the Clouds"]
+            },
+            {
+              "category": "Activities",
+              "description": "Luxury experiences among the clouds",
+              "amenities": ["Falconry Lessons", "Cable Car Tours", "Mountain Climbing", "Stargazing Deck"]
+            }
+          ],
+          "reviews": [
+            {
+              "author": "Lysa Arryn",
+              "rating": 4.7,
+              "date": "2025-09-21",
+              "comment": "The view is absolutely divine. A bit cold at night but worth every moment.",
+              "country": "The Vale"
+            },
+            {
+              "author": "Petyr Baelish",
+              "rating": 4.9,
+              "date": "2025-09-20",
+              "comment": "A rarefied atmosphere — quite literally. Excellent wine list.",
+              "country": "The Vale"
+            }
+          ],
+          "reviewCategories": [
+            { "name": "Cleanliness", "score": 5.0 },
+            { "name": "Service", "score": 4.8 },
+            { "name": "Comfort", "score": 4.9 }
+          ],
+          "nearbyAttractions": [
+            {
+              "name": "Moon Door Viewpoint",
+              "description": "Dramatic cliffside viewing platform with panoramic valley views",
+              "distance": "0.5 km"
+            },
+            {
+              "name": "Falcon Keep",
+              "description": "Sanctuary for trained hunting falcons",
+              "distance": "1.8 km"
+            }
+          ],
+          "policies": {
+            "checkIn": "2:00 PM",
+            "checkOut": "11:00 AM",
+            "cancellation": "Free cancellation up to 5 days before arrival",
+            "pets": "Not allowed",
+            "houseRules": ["No loud noise after 9 PM", "No open flames on balconies"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dorne",
+      "name": "Dorne",
+      "description": "The sunniest realm of Westeros — where desert meets sea and spice.",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop",
+      "properties": [
+        {
+          "id": "sunspear-beach-resort",
+          "name": "Sunspear Beach Resort",
+          "realm": "Dorne",
+          "shortDescription": "Mediterranean-style palace by the sea",
+          "description": "Bask in the sun-drenched splendor of Dorne at the Sunspear Beach Resort. This seaside palace offers oceanfront villas, Dornish cuisine, and lush water gardens for the perfect balance of relaxation and adventure.",
+          "rating": 4.7,
+          "priceFrom": 6999,
+          "location": "Sunspear Coast, Dorne",
+          "coordinates": { "lat": 36.12, "lng": -5.35 },
+          "mainImage": "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1200&h=800&fit=crop",
+          "galleryImages": [
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1519821172141-b5d8e7b1c8c4?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=300&fit=crop"
+          ],
+          "features": [
+            {
+              "category": "Accommodation",
+              "description": "Beachfront villas inspired by Dornish palaces, complete with private pools and ocean views",
+              "amenities": ["Private Pools", "Sea Views", "Terracotta Suites", "Cooling Courtyards"]
+            },
+            {
+              "category": "Dining",
+              "description": "Authentic Dornish cuisine featuring local spices, seafood, and wines",
+              "amenities": ["Spice Terrace", "Water Garden Restaurant", "Seafood Grills"]
+            },
+            {
+              "category": "Activities",
+              "description": "Adventurous and relaxing seaside experiences",
+              "amenities": ["Swimming", "Sailing", "Desert Tours", "Sunset Yoga"]
+            }
+          ],
+          "reviews": [
+            {
+              "author": "Oberyn Martell",
+              "rating": 5,
+              "date": "2025-08-01",
+              "comment": "The spice, the sea, the sunsets — everything Dorne stands for.",
+              "country": "Dorne"
+            },
+            {
+              "author": "Ellaria Sand",
+              "rating": 4.6,
+              "date": "2025-08-03",
+              "comment": "The beach villas are divine. Warm nights, even warmer company.",
+              "country": "Dorne"
+            }
+          ],
+          "reviewCategories": [
+            { "name": "Cleanliness", "score": 4.8 },
+            { "name": "Service", "score": 4.7 },
+            { "name": "Comfort", "score": 4.9 }
+          ],
+          "nearbyAttractions": [
+            {
+              "name": "The Water Gardens",
+              "description": "Royal gardens with fountains and reflective pools",
+              "distance": "2 km"
+            },
+            {
+              "name": "Sunspear Bazaar",
+              "description": "Lively market offering spices, silks, and local crafts",
+              "distance": "1.1 km"
+            }
+          ],
+          "policies": {
+            "checkIn": "4:00 PM",
+            "checkOut": "11:00 AM",
+            "cancellation": "Free cancellation up to 3 days before arrival",
+            "pets": "Allowed",
+            "houseRules": ["Respect beach quiet hours", "No outside food near pools"]
+          }
+        }
+      ]
+    }
+  ]
+}

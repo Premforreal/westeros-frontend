@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PropertyService } from '../services/property.service';
+import { Realm } from '../types';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   // Form model
   realmOrDestination = '';
   checkInDate: Date | null = null;
@@ -20,85 +22,18 @@ export class HomeComponent {
   showDatePanel = false; // no longer used with Material, kept harmless
 
   // Featured Realms with their properties
-  featuredRealms = [
-    { 
-      name: 'The North', 
-      description: 'Rugged beauty and ancient forests await', 
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      properties: [
-        { 
-          id: 'winterfell',
-          name: 'Winterfell Castle Hotel', 
-          rating: 4.8, 
-          priceFrom: 5999, 
-          image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
-          description: 'Ancient stronghold of House Stark turned luxury hotel'
-        },
-        {
-          id: 'white-harbor',
-          name: 'White Harbor Inn',
-          rating: 4.7,
-          priceFrom: 4999,
-          image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-          description: 'Seaside luxury in the North\'s largest port'
-        },
-        {
-          id: 'dreadfort',
-          name: 'The Dreadfort Keep',
-          rating: 4.6,
-          priceFrom: 4499,
-          image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop',
-          description: 'Historic castle with modern amenities'
-        }
-      ]
-    },
-    { 
-      name: 'Dorne', 
-      description: 'Sun-soaked deserts and exotic luxury', 
-      image: 'https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?w=800&h=600&fit=crop',
-      properties: [
-        {
-          id: 'sunspear',
-          name: 'Sunspear Palace Resort',
-          rating: 4.9,
-          priceFrom: 7499,
-          image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-          description: 'Luxury resort in the heart of Dorne'
-        },
-        {
-          id: 'water-gardens',
-          name: 'Water Gardens Retreat',
-          rating: 4.8,
-          priceFrom: 6999,
-          image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop',
-          description: 'Peaceful oasis with private pools'
-        }
-      ]
-    },
-    { 
-      name: 'The Vale', 
-      description: 'Mountain peaks and alpine serenity', 
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      properties: [
-        {
-          id: 'eyrie',
-          name: 'The Eyrie Resort',
-          rating: 4.7,
-          priceFrom: 6999,
-          image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop',
-          description: 'Exclusive mountaintop resort with stunning views'
-        },
-        {
-          id: 'gates-moon',
-          name: 'Gates of the Moon Lodge',
-          rating: 4.6,
-          priceFrom: 5499,
-          image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop',
-          description: 'Winter residence at the foot of the mountain'
-        }
-      ]
-    }
-  ];
+  featuredRealms: Realm[] = [];
+
+  constructor(private propertyService: PropertyService) {}
+
+  ngOnInit(): void {
+    console.log('Initializing HomeComponent...');
+    this.propertyService.getRealms().subscribe(realms => {
+      console.log('Received realms:', realms);
+      this.featuredRealms = realms;
+      console.log('Featured properties:', this.featuredProperties);
+    });
+  }
 
   // Get all featured properties across realms for the homepage
   get featuredProperties() {

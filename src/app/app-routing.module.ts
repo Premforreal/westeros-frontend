@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'resort/:id', component: ResortDetailComponent },
-      { path: 'realm/:name', component: RealmDetailComponent },
+      { path: 'realm/:id', component: RealmDetailComponent },
       { path: '**', redirectTo: '' }
     ]
   }

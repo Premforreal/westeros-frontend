@@ -81,31 +81,27 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
     'Tour Desk'
   ];
   
-  // Room types
-  roomTypes: RoomType[] = [
+  // Resort Features
+  resortFeatures = [
     {
-      name: 'Stark Suite',
-      description: 'Spacious suite with king bed, living area, and mountain views',
-      capacity: 2,
-      pricePerNight: 8999,
-      amenities: ['King Bed', 'Mountain View', 'Fireplace', 'Balcony', 'Mini Bar'],
-      image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&h=300&fit=crop'
+      category: 'Accommodation',
+      description: 'Luxurious castle accommodations featuring authentic medieval architecture with modern comforts',
+      amenities: ['Themed Suites', 'Private Towers', 'Castle Views', 'Modern Heating']
     },
     {
-      name: 'Direwolf Den',
-      description: 'Cozy room with rustic charm and forest views',
-      capacity: 2,
-      pricePerNight: 5999,
-      amenities: ['Queen Bed', 'Forest View', 'Fireplace', 'Free WiFi'],
-      image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=400&h=300&fit=crop'
+      category: 'Dining',
+      description: 'Multiple dining venues serving Northern cuisine with locally-sourced ingredients',
+      amenities: ['Great Hall Restaurant', 'Winterfell Tavern', 'Private Dining', 'Room Service']
     },
     {
-      name: 'Family Quarters',
-      description: 'Two-bedroom suite perfect for families with children',
-      capacity: 4,
-      pricePerNight: 12999,
-      amenities: ['2 Bedrooms', 'Living Room', 'Kitchenette', 'Balcony', 'Kids Welcome'],
-      image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&h=300&fit=crop'
+      category: 'Activities',
+      description: 'Immersive experiences that bring the North to life',
+      amenities: ['Archery Range', 'Horse Riding', 'Castle Tours', 'Winter Sports']
+    },
+    {
+      category: 'Wellness',
+      description: 'Relaxation and rejuvenation in our castle spa',
+      amenities: ['Hot Spring Baths', 'Massage Services', 'Indoor Pool', 'Fitness Center']
     }
   ];
   
@@ -166,7 +162,10 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
   checkInDate: Date | null = null;
   checkOutDate: Date | null = null;
   guests = 2;
-  selectedRoom: RoomType | null = null;
+  
+  // Booking calculations
+  numberOfNights = 0;
+  totalPrice = 0;
   
   // Date constraints
   minCheckInDate: Date = new Date();
@@ -203,32 +202,24 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
     return Array(5).fill(0).map((_, i) => i < Math.floor(rating) ? 1 : 0);
   }
   
-  selectRoom(room: RoomType): void {
-    this.selectedRoom = room;
-  }
-  
   bookNow(): void {
-    if (!this.checkInDate || !this.checkOutDate || !this.selectedRoom) {
-      alert('Please select dates and a room type');
+    if (!this.checkInDate || !this.checkOutDate) {
+      alert('Please select dates for your stay');
       return;
     }
     
-    // Calculate total nights and price
-    const nights = Math.ceil((this.checkOutDate.getTime() - this.checkInDate.getTime()) / (1000 * 60 * 60 * 24));
-    const totalPrice = nights * this.selectedRoom.pricePerNight;
-    
     console.log('Booking:', {
       resort: this.resortName,
-      room: this.selectedRoom.name,
       checkIn: this.checkInDate,
       checkOut: this.checkOutDate,
       guests: this.guests,
-      nights,
-      totalPrice
+      nights: this.numberOfNights,
+      totalPrice: this.totalPrice,
+      pricePerNight: this.priceFrom
     });
     
     // TODO: Navigate to booking confirmation page
-    alert(`Booking confirmed! Total: ₹${totalPrice.toLocaleString()} for ${nights} night(s)`);
+    alert(`Booking confirmed!\n\nStay Details:\n${this.numberOfNights} nights at ₹${this.priceFrom.toLocaleString()} per night\nTotal: ₹${this.totalPrice.toLocaleString()}`);
   }
   
   onCheckInDateChange(): void {
@@ -241,12 +232,30 @@ Each room is elegantly appointed with rustic wooden furnishings, stone fireplace
     } else {
       this.minCheckOutDate = this.addDays(new Date(), 1);
     }
+    this.updateBookingCalculations();
   }
 
   clearDates(): void {
     this.checkInDate = null;
     this.checkOutDate = null;
     this.minCheckOutDate = this.addDays(new Date(), 1);
+    this.updateBookingCalculations();
+  }
+
+  onCheckOutDateChange(): void {
+    this.updateBookingCalculations();
+  }
+
+  private updateBookingCalculations(): void {
+    if (this.checkInDate && this.checkOutDate) {
+      this.numberOfNights = Math.ceil(
+        (this.checkOutDate.getTime() - this.checkInDate.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      this.totalPrice = this.numberOfNights * this.priceFrom;
+    } else {
+      this.numberOfNights = 0;
+      this.totalPrice = 0;
+    }
   }
   
   private addDays(date: Date, days: number): Date {

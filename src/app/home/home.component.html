@@ -48,12 +48,14 @@
     <div class="row g-4">
       <div class="col-12 col-md-4" *ngFor="let realm of featuredRealms">
         <div class="card realm-card border-0 shadow-sm h-100 overflow-hidden">
-          <div class="realm-image-wrapper position-relative">
-            <img [src]="realm.image" [alt]="realm.name" class="card-img-top">
-            <div class="realm-overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-end p-3">
-              <h5 class="text-white fw-bold mb-0">{{ realm.name }}</h5>
+          <a [routerLink]="['/realm', realm.id]" class="text-decoration-none">
+            <div class="realm-image-wrapper position-relative">
+              <img [src]="realm.image" [alt]="realm.name" class="card-img-top">
+              <div class="realm-overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-end p-3">
+                <h5 class="text-white fw-bold mb-0">{{ realm.name }}</h5>
+              </div>
             </div>
-          </div>
+          </a>
           <div class="card-body">
             <p class="card-text text-muted small mb-3">{{ realm.description }}</p>
             <p class="small mb-3">
@@ -69,7 +71,7 @@
                 </li>
               </ul>
             </div>
-            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/realm', realm.name.toLowerCase()]">
+            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/realm', realm.id]">
               Explore {{ realm.name }}
             </a>
           </div>
@@ -85,7 +87,7 @@
       <div class="col-12 col-sm-6 col-lg-3" *ngFor="let property of featuredProperties">
         <div class="card resort-card border-0 shadow-sm h-100">
           <div class="position-relative">
-            <img [src]="property.image" [alt]="property.name" class="card-img-top resort-image">
+            <img [src]="property.mainImage" [alt]="property.name" class="card-img-top resort-image">
             <span class="badge bg-primary position-absolute top-0 end-0 m-2">{{ property.realm }}</span>
           </div>
           <div class="card-body">

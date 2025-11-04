@@ -95,7 +95,7 @@
           <div class="col-md-6" *ngFor="let property of realm.properties">
             <div class="card property-card border-0 shadow-sm h-100">
               <div class="position-relative">
-                <img [src]="property.image" [alt]="property.name" class="card-img-top property-image">
+                <img [src]="property.mainImage" [alt]="property.name" class="card-img-top property-image">
                 <div class="position-absolute top-0 end-0 m-3">
                   <span class="badge bg-primary">
                     {{ property.rating }}
