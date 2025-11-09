@@ -5,10 +5,46 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Menu Links -->
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item" *ngFor="let link of menuLinks">
-          <a class="nav-link" [routerLink]="link.url" routerLinkActive="active">{{ link.title }}</a>
+        <!-- List Property Link (Always visible) -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list-property">List your property</a>
         </li>
+
+        <!-- Guest Links (show when not authenticated) -->
+        <ng-container *ngIf="!isAuthenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sign-in">Sign in</a>
+          </li>
+        </ng-container>
+
+        <!-- User Links (show when authenticated) -->
+        <ng-container *ngIf="isAuthenticated">
+          <!-- Display role-specific icon -->
+          <li class="nav-item">
+            <span class="nav-link text-secondary">
+              <i class="bi" [ngClass]="{
+                'bi-person-circle': !userRole || userRole === 'User',
+                'bi-shop': userRole === 'Vendor',
+                'bi-shield-lock': userRole === 'Admin'
+              }"></i>
+            </span>
+          </li>
+
+          <!-- Dynamic Menu Links based on role -->
+          <li class="nav-item" *ngFor="let link of menuLinks">
+            <a class="nav-link" [routerLink]="link.url" routerLinkActive="active">{{ link.title }}</a>
+          </li>
+
+          <!-- Logout Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" (click)="logout()">Sign out</a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>

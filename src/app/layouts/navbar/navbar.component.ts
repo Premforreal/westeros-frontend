@@ -10,13 +10,25 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   menuLinks: Array<{ title: string; url: string }>=[];
+  isAuthenticated = false;
+  userRole?: string;
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
+    // Get authentication status and role
+    this.isAuthenticated = this.auth.isAuthenticated();
+    this.userRole = this.auth.getPrimaryRole();
+
+    // Get role-based menu items
     const roles = this.auth.getUserRoles();
     const filtered = this.filterByRole(MENU, roles);
     this.menuLinks = this.flattenToLinks(filtered);
+  }
+
+  logout(): void {
+    this.auth.logout();
+    window.location.href = '/'; // Force refresh to home
   }
 
   private filterByRole(items: CoreMenuItem[], roles: string[]): CoreMenuItem[] {
