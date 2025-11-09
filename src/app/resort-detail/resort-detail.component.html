@@ -6,21 +6,21 @@
     <!-- Hero Section with Image Gallery -->
     <div class="resort-hero position-relative">
       <div class="main-image-wrapper">
-        <img [src]="mainImage" [alt]="property?.name" class="main-image w-100">
+        <img [src]="mainImage" [alt]="property.name" class="main-image w-100">
         <div class="hero-overlay">
           <div class="container">
             <div class="hero-content">
-              <span class="badge bg-primary mb-2">{{ property?.realm }}</span>
-              <h1 class="resort-title text-white mb-2">{{ property?.name }}</h1>
+              <span class="badge bg-primary mb-2">{{ property.realm }}</span>
+              <h1 class="resort-title text-white mb-2">{{ property.name }}</h1>
               <div class="d-flex align-items-center text-white mb-2">
-                <span class="rating-badge me-3" [ngClass]="getRatingClass(property?.rating || 0)">
-                  {{ property?.rating }}
+                <span class="rating-badge me-3" [ngClass]="getRatingClass(property.rating || 0)">
+                  {{ property.rating }}
                 </span>
-                <span class="rating-text">{{ getRatingText(property?.rating || 0) }}</span>
+                <span class="rating-text">{{ getRatingText(property.rating || 0) }}</span>
                 <span class="mx-2">•</span>
-                <span>{{ property?.reviews?.length || 0 }} reviews</span>
+                <span>{{ property.reviews.length || 0 }} reviews</span>
               </div>
-              <p class="location mb-0">📍 {{ property?.location }}</p>
+              <p class="location mb-0">📍 {{ property.location }}</p>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
               <div class="col-md-6" *ngFor="let feat of (property?.features || [])">
                 <div class="d-flex align-items-center mb-2">
                   <span class="text-success me-2">✓</span>
-                  <span>{{ feat.amenities?.[0] || feat.category }}</span>
+                  <span>{{ feat.amenities[0] || feat.category }}</span>
                 </div>
               </div>
             </div>
@@ -181,7 +181,7 @@
               <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h3 class="mb-0">Book Your Stay</h3>
-                  <span class="price-badge h4 text-primary mb-0">₹{{ property?.priceFrom | number }}</span>
+                  <span class="price-badge h4 text-primary mb-0">₹{{ property.priceFrom | number }}</span>
                 </div>
                 <p class="text-muted small mb-4">per night</p>
 
@@ -220,7 +220,7 @@
                 <div class="price-info mb-3 p-3 bg-light rounded">
                   <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="fw-bold">Base Rate</div>
-                    <div>₹{{ property?.priceFrom | number }} / night</div>
+                    <div>₹{{ property.priceFrom | number }} / night</div>
                   </div>
                   
                   <ng-container *ngIf="numberOfNights > 0">

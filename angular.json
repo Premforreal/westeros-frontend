@@ -60,7 +60,7 @@
                 }
               ],
               "outputHashing": "all",
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "optimization": true,
               "vendorChunk": false,
               "extractLicenses": true,
