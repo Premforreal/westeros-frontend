@@ -65,7 +65,8 @@
               "vendorChunk": false,
               "extractLicenses": true,
               "sourceMap": false,
-              "namedChunks": false
+              "namedChunks": false,
+              "baseHref": "/westeros-frontend/"
             },
             "development": {
               "buildOptimizer": false,
