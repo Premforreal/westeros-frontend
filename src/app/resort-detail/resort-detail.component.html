@@ -1,23 +1,26 @@
 <div class="resort-detail-page">
   <div class="container-fluid p-0">
+    <div *ngIf="loading" class="p-5 text-center">Loading property...</div>
+    <div *ngIf="!loading && error" class="p-5 text-center text-danger">Property not found or failed to load.</div>
+    <div *ngIf="!loading && property">
     <!-- Hero Section with Image Gallery -->
     <div class="resort-hero position-relative">
       <div class="main-image-wrapper">
-        <img [src]="mainImage" [alt]="resortName" class="main-image w-100">
+        <img [src]="mainImage" [alt]="property?.name" class="main-image w-100">
         <div class="hero-overlay">
           <div class="container">
             <div class="hero-content">
-              <span class="badge bg-primary mb-2">{{ realm }}</span>
-              <h1 class="resort-title text-white mb-2">{{ resortName }}</h1>
+              <span class="badge bg-primary mb-2">{{ property?.realm }}</span>
+              <h1 class="resort-title text-white mb-2">{{ property?.name }}</h1>
               <div class="d-flex align-items-center text-white mb-2">
-                <span class="rating-badge me-3" [ngClass]="getRatingClass(rating)">
-                  {{ rating }}
+                <span class="rating-badge me-3" [ngClass]="getRatingClass(property?.rating || 0)">
+                  {{ property?.rating }}
                 </span>
-                <span class="rating-text">{{ getRatingText(rating) }}</span>
+                <span class="rating-text">{{ getRatingText(property?.rating || 0) }}</span>
                 <span class="mx-2">•</span>
-                <span>{{ reviewCount }} reviews</span>
+                <span>{{ property?.reviews?.length || 0 }} reviews</span>
               </div>
-              <p class="location mb-0">📍 {{ location }}</p>
+              <p class="location mb-0">📍 {{ property?.location }}</p>
             </div>
           </div>
         </div>
@@ -26,8 +29,8 @@
       <!-- Image Gallery Thumbnails -->
       <div class="container mt-3">
         <div class="row g-2">
-          <div class="col-4 col-md-2" *ngFor="let image of galleryImages.slice(0, 6)">
-            <img [src]="image" alt="Resort gallery" class="gallery-thumb w-100 rounded" 
+          <div class="col-4 col-md-2" *ngFor="let image of (property?.galleryImages || []).slice(0,6)">
+            <img [src]="image" alt="Resort gallery" class="gallery-thumb w-100 rounded"
                  (click)="setMainImage(image)"
                  [class.active]="mainImage === image"
                  style="cursor: pointer;">
@@ -46,10 +49,10 @@
           <section class="mb-5">
             <h2 class="section-title mb-4">Property Highlights</h2>
             <div class="row g-3">
-              <div class="col-6 col-md-3" *ngFor="let facility of highlights">
+              <div class="col-6 col-md-3" *ngFor="let feature of (property?.features || [])">
                 <div class="facility-card text-center p-3 border rounded">
-                  <div class="facility-icon fs-2 mb-2">{{ facility.icon }}</div>
-                  <div class="facility-name small">{{ facility.name }}</div>
+                  <div class="facility-icon fs-2 mb-2">🏷️</div>
+                  <div class="facility-name small">{{ feature.category }}</div>
                 </div>
               </div>
             </div>
@@ -59,7 +62,7 @@
           <section class="mb-5">
             <h2 class="section-title mb-4">About This Property</h2>
             <div class="description-text">
-              <p *ngFor="let paragraph of description.split('\n\n')">{{ paragraph }}</p>
+              <p *ngFor="let paragraph of (property?.description || '').split('\n\n')">{{ paragraph }}</p>
             </div>
           </section>
 
@@ -67,10 +70,10 @@
           <section class="mb-5">
             <h2 class="section-title mb-4">Most Popular Facilities</h2>
             <div class="row">
-              <div class="col-md-6" *ngFor="let facility of popularFacilities">
+              <div class="col-md-6" *ngFor="let feat of (property?.features || [])">
                 <div class="d-flex align-items-center mb-2">
                   <span class="text-success me-2">✓</span>
-                  <span>{{ facility }}</span>
+                  <span>{{ feat.amenities?.[0] || feat.category }}</span>
                 </div>
               </div>
             </div>
@@ -80,13 +83,13 @@
           <section class="mb-5" id="features">
             <h2 class="section-title mb-4">Resort Features</h2>
             <div class="row g-4">
-              <div class="col-12 col-md-6" *ngFor="let feature of resortFeatures">
+              <div class="col-12 col-md-6" *ngFor="let feature of (property?.features || [])">
                 <div class="feature-card border rounded p-4">
                   <h4 class="feature-title mb-3">{{ feature.category }}</h4>
                   <p class="feature-description text-muted mb-3">{{ feature.description }}</p>
                   <div class="amenities">
                     <div class="row g-2">
-                      <div class="col-6" *ngFor="let amenity of feature.amenities">
+                      <div class="col-6" *ngFor="let amenity of (feature.amenities || [])">
                         <div class="d-flex align-items-center">
                           <span class="text-success me-2">✓</span>
                           <span class="small">{{ amenity }}</span>
@@ -106,7 +109,7 @@
             <!-- Review Categories -->
             <div class="review-categories mb-4 p-4 bg-light rounded">
               <div class="row g-3">
-                <div class="col-6 col-md-4" *ngFor="let category of reviewCategories">
+                <div class="col-6 col-md-4" *ngFor="let category of (property?.reviewCategories || [])">
                   <div class="d-flex justify-content-between align-items-center">
                     <span class="small">{{ category.name }}</span>
                     <span class="badge bg-primary">{{ category.score }}</span>
@@ -117,7 +120,7 @@
 
             <!-- Individual Reviews -->
             <div class="reviews-list">
-              <div class="review-card border rounded p-4 mb-3" *ngFor="let review of reviews">
+              <div class="review-card border rounded p-4 mb-3" *ngFor="let review of (property?.reviews || [])">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <div>
                     <h6 class="mb-1">{{ review.author }}</h6>
@@ -138,7 +141,7 @@
           <section class="mb-5">
             <h2 class="section-title mb-4">What's Nearby</h2>
             <div class="list-group">
-              <div class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let attraction of nearbyAttractions">
+              <div class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let attraction of (property?.nearbyAttractions || [])">
                 <span>🏛️ {{ attraction.name }}</span>
                 <span class="badge bg-secondary">{{ attraction.distance }}</span>
               </div>
@@ -151,19 +154,19 @@
             <div class="house-rules p-4 border rounded">
               <div class="row g-3">
                 <div class="col-md-6">
-                  <strong>Check-in:</strong> From {{ houseRules.checkIn }}
+                  <strong>Check-in:</strong> From {{ property.policies.checkIn || '—' }}
                 </div>
                 <div class="col-md-6">
-                  <strong>Check-out:</strong> Until {{ houseRules.checkOut }}
+                  <strong>Check-out:</strong> Until {{ property.policies.checkOut || '—' }}
                 </div>
                 <div class="col-12">
-                  <strong>Children:</strong> {{ houseRules.childrenPolicy }}
+                  <strong>Children:</strong> {{ property.policies.childrenPolicy || '—' }}
                 </div>
                 <div class="col-12">
-                  <strong>Pets:</strong> {{ houseRules.petsPolicy }}
+                  <strong>Pets:</strong> {{ property.policies.petsPolicy || '—' }}
                 </div>
                 <div class="col-12">
-                  <strong>Cancellation:</strong> {{ houseRules.cancellationPolicy }}
+                  <strong>Cancellation:</strong> {{ property.policies.cancellationPolicy || '—' }}
                 </div>
               </div>
             </div>
@@ -178,7 +181,7 @@
               <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h3 class="mb-0">Book Your Stay</h3>
-                  <span class="price-badge h4 text-primary mb-0">₹{{ priceFrom | number }}</span>
+                  <span class="price-badge h4 text-primary mb-0">₹{{ property?.priceFrom | number }}</span>
                 </div>
                 <p class="text-muted small mb-4">per night</p>
 
@@ -217,7 +220,7 @@
                 <div class="price-info mb-3 p-3 bg-light rounded">
                   <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="fw-bold">Base Rate</div>
-                    <div>₹{{ priceFrom | number }} / night</div>
+                    <div>₹{{ property?.priceFrom | number }} / night</div>
                   </div>
                   
                   <ng-container *ngIf="numberOfNights > 0">
