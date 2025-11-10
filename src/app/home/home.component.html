@@ -48,62 +48,44 @@
     <div class="row g-4">
       <div class="col-12 col-md-4" *ngFor="let realm of featuredRealms">
         <div class="card realm-card border-0 shadow-sm h-100 overflow-hidden">
-          <a [routerLink]="['/realm', realm.id]" class="text-decoration-none">
-            <div class="realm-image-wrapper position-relative">
-              <img [src]="realm.image" [alt]="realm.name" class="card-img-top">
-              <div class="realm-overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-end p-3">
-                <h5 class="text-white fw-bold mb-0">{{ realm.name }}</h5>
-              </div>
+          <div class="realm-image-wrapper position-relative">
+            <img [src]="realm.image" [alt]="realm.name" class="card-img-top">
+            <div class="realm-overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-end p-3">
+              <h5 class="text-white fw-bold mb-0">{{ realm.name }}</h5>
             </div>
-          </a>
+          </div>
           <div class="card-body">
             <p class="card-text text-muted small mb-3">{{ realm.description }}</p>
-            <p class="small mb-3">
-              <strong>{{ realm.properties.length }} Properties Available</strong>
-            </p>
-            <div class="properties-preview mb-3">
-              <div class="small text-muted mb-2">Notable Properties:</div>
-              <ul class="list-unstyled">
-                <li class="mb-1" *ngFor="let property of realm.properties.slice(0, 2)">
-                  <a [routerLink]="['/resort', property.id]" class="text-decoration-none">
-                    <i class="bi bi-building"></i> {{ property.name }}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/realm', realm.id]">
-              Explore {{ realm.name }}
-            </a>
+            <a class="btn btn-outline-primary btn-sm" href="javascript:void(0)">Explore {{ realm.name }}</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Featured Properties -->
+  <!-- Featured Resorts -->
   <div class="mb-5">
-    <h2 class="h3 fw-bold mb-4">Featured Properties</h2>
+    <h2 class="h3 fw-bold mb-4">Featured Resorts</h2>
     <div class="row g-4">
-      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let property of featuredProperties">
+      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let resort of featuredResorts; let i = index">
         <div class="card resort-card border-0 shadow-sm h-100">
           <div class="position-relative">
-            <img [src]="property.mainImage" [alt]="property.name" class="card-img-top resort-image">
-            <span class="badge bg-primary position-absolute top-0 end-0 m-2">{{ property.realm }}</span>
+            <img [src]="resort.image" [alt]="resort.name" class="card-img-top resort-image">
+            <span class="badge bg-primary position-absolute top-0 end-0 m-2">{{ resort.realm }}</span>
           </div>
           <div class="card-body">
-            <h6 class="card-title fw-bold mb-2">{{ property.name }}</h6>
-            <p class="small text-muted mb-2">{{ property.description }}</p>
+            <h6 class="card-title fw-bold mb-2">{{ resort.name }}</h6>
             <div class="d-flex align-items-center mb-2">
               <span class="rating-stars text-warning me-2">★★★★☆</span>
-              <span class="small text-muted">({{ property.rating }})</span>
+              <span class="small text-muted">({{ resort.rating }})</span>
             </div>
             <div class="d-flex justify-content-between align-items-center">
               <div>
                 <div class="small text-muted">From</div>
-                <div class="h5 mb-0 text-primary fw-bold">₹{{ property.priceFrom | number }}</div>
+                <div class="h5 mb-0 text-primary fw-bold">₹{{ resort.priceFrom | number }}</div>
                 <div class="small text-muted">per night</div>
               </div>
-              <a [routerLink]="['/resort', property.id]" class="btn btn-sm btn-outline-primary">View</a>
+              <a [routerLink]="['/resort', i + 1]" class="btn btn-sm btn-outline-primary">View</a>
             </div>
           </div>
         </div>

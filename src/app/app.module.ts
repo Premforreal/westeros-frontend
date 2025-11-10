@@ -14,13 +14,17 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { HomeComponent } from './home/home.component';
 import { ResortDetailComponent } from './resort-detail/resort-detail.component';
 import { RealmDetailComponent } from './realm-detail/realm-detail.component';
+import { HomeComponent as PropertyOwnerHomeComponent } from './property-owner/home/home.component';
+import { DashboardComponent } from './property-owner/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ResortDetailComponent,
-    RealmDetailComponent
+    RealmDetailComponent,
+    PropertyOwnerHomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MENU } from '../../menu/menu.config';
 import type { CoreMenuItem } from '../../menu/menu.types';
 import { AuthService } from '../../services/auth.service';
+import { PRODUCT } from '../../../product-configurations/product-selection';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ export class NavbarComponent implements OnInit {
   menuLinks: Array<{ title: string; url: string }>=[];
   isAuthenticated = false;
   userRole?: string;
+  product = PRODUCT;
 
   constructor(private auth: AuthService) {}
 

@@ -4,12 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:dev": "ng serve --configuration=development",
-    "start:prod": "ng serve --configuration=production",
+    "start:customer": "ng serve --configuration=customer-development",
+    "start:property-owner": "ng serve --configuration=property-owner-development --open",
     "build": "ng build",
-    "build:dev": "ng build --configuration=development",
-    "build:prod": "ng build --configuration=production",
-    "watch": "ng build --watch --configuration development",
+    "build:customer": "ng build --configuration=customer-production",
+    "build:property-owner": "ng build --configuration=property-owner-production",
+    "watch": "ng build --watch --configuration customer-development",
     "test": "ng test"
   },
   "private": true,

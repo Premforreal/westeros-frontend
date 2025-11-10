@@ -40,7 +40,7 @@
             ]
           },
           "configurations": {
-            "production": {
+            "customer-production": {
               "budgets": [
                 {
                   "type": "initial",
@@ -60,15 +60,16 @@
                 }
               ],
               "outputHashing": "all",
+              "outputPath": "dist/customer",
               "buildOptimizer": false,
               "optimization": true,
               "vendorChunk": false,
               "extractLicenses": true,
               "sourceMap": false,
               "namedChunks": false,
-              "baseHref": "/westeros-frontend/"
+              "baseHref": "/"
             },
-            "development": {
+            "customer-development": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -81,6 +82,53 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "property-owner-production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/property-owner/environment.production.ts"
+                },
+                {
+                  "replace": "src/app/menu/menu.config.ts",
+                  "with": "src/app/menu/property-owner-menu.ts"
+                },
+                {
+                  "replace": "src/product-configurations/product-config.ts",
+                  "with": "src/product-configurations/property-owner-config.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "outputPath": "dist/property-owner",
+              "buildOptimizer": false,
+              "optimization": true,
+              "vendorChunk": false,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "baseHref": "/"
+            },
+            "property-owner-development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/property-owner/environment.development.ts"
+                },
+                {
+                  "replace": "src/app/menu/menu.config.ts",
+                  "with": "src/app/menu/property-owner-menu.ts"
+                },
+                {
+                  "replace": "src/product-configurations/product-config.ts",
+                  "with": "src/product-configurations/property-owner-config.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -88,14 +136,22 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "browserTarget": "westeros-frontend:build:production"
+            "customer-production": {
+              "browserTarget": "westeros-frontend:build:customer-production"
             },
-            "development": {
-              "browserTarget": "westeros-frontend:build:development"
+            "customer-development": {
+              "browserTarget": "westeros-frontend:build:customer-development",
+              "port": 4200
+            },
+            "property-owner-production": {
+              "browserTarget": "westeros-frontend:build:property-owner-production"
+            },
+            "property-owner-development": {
+              "browserTarget": "westeros-frontend:build:property-owner-development",
+              "port": 4201
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "customer-development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
