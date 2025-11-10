@@ -664,6 +664,12 @@ Currently using structured mock data for demonstration:
 7. ✅ Created review system with categories
 8. ✅ Added sticky booking card with validation
 9. ✅ Configured routing for resort details
+ 
+### Hotfixes & Dev Notes (Nov 9-10, 2025)
+- ✅ Removed the SPA redirect script from `src/index.html` during development to avoid Quirks Mode and runtime selector issues. Use `src/404.html` (the SPA redirect) only for GitHub Pages production deployments.
+- ✅ Cleaned up template optional-chaining in `src/app/resort-detail/resort-detail.component.html` to remove unnecessary `?.` forms where the component guarantees `property` is defined after load (reduces NG8107 warnings).
+- ✅ Temporarily disabled `buildOptimizer` for production in `angular.json` to avoid a minifier-related "unterminated regular expression" syntax problem that appeared in some CI-built bundles; this is a targeted workaround pending further investigation.
+- ℹ️ If you see "ERROR Error: The selector \"app-root\" did not match any elements" in the browser console, refresh the dev server after changes to `index.html` and ensure `<!doctype html>` is present (Quirks Mode causes Angular runtime issues).
 
 ## 🤝 Contributing
 
