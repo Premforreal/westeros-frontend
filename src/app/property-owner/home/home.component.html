@@ -4,18 +4,28 @@
       <div class="card shadow">
         <div class="card-body p-5">
           <h2 class="text-center mb-4">Property Owner Login</h2>
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+              <div class="text-danger small" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                Please enter a valid email
+              </div>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter your password">
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password">
+              <div class="text-danger small" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                Password is required
+              </div>
             </div>
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg">Login</button>
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading || loginForm.invalid">
+                <span *ngIf="loading">Logging in...</span>
+                <span *ngIf="!loading">Login</span>
+              </button>
             </div>
+            <div class="text-danger text-center mt-3" *ngIf="error">{{ error }}</div>
           </form>
           <div class="text-center mt-3">
             <a href="#" class="text-decoration-none">Forgot password?</a>

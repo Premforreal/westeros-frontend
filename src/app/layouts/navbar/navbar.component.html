@@ -10,13 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- Menu Links -->
       <ul class="navbar-nav ms-auto">
-        <!-- List Property Link (Always visible) -->
-        <li class="nav-item">
+        <!-- List Property Link (Only for customer) -->
+        <li class="nav-item" *ngIf="product === 'customer'">
           <a class="nav-link" routerLink="/list-property">List your property</a>
         </li>
 
-        <!-- Guest Links (show when not authenticated) -->
-        <ng-container *ngIf="!isAuthenticated">
+        <!-- Guest Links (show when not authenticated and customer) -->
+        <ng-container *ngIf="!isAuthenticated && product === 'customer'">
           <li class="nav-item">
             <a class="nav-link" routerLink="/register">Register</a>
           </li>

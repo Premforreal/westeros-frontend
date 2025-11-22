@@ -4,7 +4,15 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { AuthControllerService } from './services/auth-controller.service';
+import { BookingControllerService } from './services/booking-controller.service';
+import { MenuControllerService } from './services/menu-controller.service';
 import { PingControllerService } from './services/ping-controller.service';
+import { ProductConfigControllerService } from './services/product-config-controller.service';
+import { PropertyControllerService } from './services/property-controller.service';
+import { RealmControllerService } from './services/realm-controller.service';
+import { ResortControllerService } from './services/resort-controller.service';
+import { UserControllerService } from './services/user-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -14,7 +22,15 @@ import { PingControllerService } from './services/ping-controller.service';
   exports: [],
   declarations: [],
   providers: [
+    AuthControllerService,
+    BookingControllerService,
+    MenuControllerService,
     PingControllerService,
+    ProductConfigControllerService,
+    PropertyControllerService,
+    RealmControllerService,
+    ResortControllerService,
+    UserControllerService,
     ApiConfiguration
   ],
 })
