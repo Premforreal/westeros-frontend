@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # or main
+      - master
   workflow_dispatch:
 
 permissions:
@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-customer:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build -- --configuration production --base-href /westeros-frontend/
+      - name: Build Customer App
+        run: npm run build:customer
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -40,8 +40,36 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/westeros-frontend'
+          path: './dist/customer'
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy Customer to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  build-and-deploy-property-owner:
+    runs-on: ubuntu-latest
+    if: github.repository == 'Premforreal/westeros-frontend'  # Only run on main repo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Property Owner App
+        run: npm run build:property-owner
+
+      - name: Deploy Property Owner to separate repo
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/property-owner
+          destination_dir: .
+          external_repository: Premforreal/westeros-admin
+          publish_branch: gh-pages
