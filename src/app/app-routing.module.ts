@@ -6,6 +6,9 @@ import { ResortDetailComponent } from './resort-detail/resort-detail.component';
 import { RealmDetailComponent } from './realm-detail/realm-detail.component';
 import { HomeComponent as PropertyOwnerHomeComponent } from './property-owner/home/home.component';
 import { DashboardComponent } from './property-owner/dashboard/dashboard.component';
+import { PropertiesComponent } from './property-owner/properties/properties.component';
+import { BookingsComponent } from './property-owner/bookings/bookings.component';
+import { ReportsComponent } from './property-owner/reports/reports.component';
 import { PRODUCT } from '../product-configurations/product-selection';
 
 const routes: Routes = PRODUCT === 'property-owner' ? [
@@ -15,6 +18,9 @@ const routes: Routes = PRODUCT === 'property-owner' ? [
     children: [
       { path: '', component: PropertyOwnerHomeComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'properties', component: PropertiesComponent },
+      { path: 'bookings', component: BookingsComponent },
+      { path: 'reports', component: ReportsComponent },
       { path: '**', redirectTo: '' }
     ]
   }

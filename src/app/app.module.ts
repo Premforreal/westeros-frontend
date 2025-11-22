@@ -16,6 +16,9 @@ import { ResortDetailComponent } from './resort-detail/resort-detail.component';
 import { RealmDetailComponent } from './realm-detail/realm-detail.component';
 import { HomeComponent as PropertyOwnerHomeComponent } from './property-owner/home/home.component';
 import { DashboardComponent } from './property-owner/dashboard/dashboard.component';
+import { PropertiesComponent } from './property-owner/properties/properties.component';
+import { BookingsComponent } from './property-owner/bookings/bookings.component';
+import { ReportsComponent } from './property-owner/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { DashboardComponent } from './property-owner/dashboard/dashboard.compone
     ResortDetailComponent,
     RealmDetailComponent,
     PropertyOwnerHomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    PropertiesComponent,
+    BookingsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
