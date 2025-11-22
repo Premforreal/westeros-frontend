@@ -3,7 +3,8 @@
     <div class="row g-2">
       <div class="col-md-6">
         <h6 class="mb-1 text-light">About</h6>
-        <p class="text-secondary small mb-0">Westeros project - A demo Angular application</p>
+        <p class="text-secondary small mb-0" *ngIf="product === 'customer'">Westeros project - A demo Angular application</p>
+        <p class="text-secondary small mb-0" *ngIf="product === 'property-owner'">Property Owner Portal - Manage your properties</p>
       </div>
       <div class="col-md-6">
         <h6 class="mb-1 text-light">Links</h6>
@@ -15,7 +16,8 @@
     </div>
     <hr class="my-2 border-secondary opacity-25">
     <div class="text-center">
-      <p class="text-secondary small mb-0">&copy; {{currentYear}} Westeros. All rights reserved.</p>
+      <p class="text-secondary small mb-0" *ngIf="product === 'customer'">&copy; {{currentYear}} Westeros. All rights reserved.</p>
+      <p class="text-secondary small mb-0" *ngIf="product === 'property-owner'">&copy; {{currentYear}} Property Owner Portal. All rights reserved.</p>
     </div>
   </div>
 </footer>

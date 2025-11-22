@@ -1,1 +1,9 @@
+export { AuthControllerService } from './services/auth-controller.service';
+export { BookingControllerService } from './services/booking-controller.service';
+export { MenuControllerService } from './services/menu-controller.service';
 export { PingControllerService } from './services/ping-controller.service';
+export { ProductConfigControllerService } from './services/product-config-controller.service';
+export { PropertyControllerService } from './services/property-controller.service';
+export { RealmControllerService } from './services/realm-controller.service';
+export { ResortControllerService } from './services/resort-controller.service';
+export { UserControllerService } from './services/user-controller.service';
